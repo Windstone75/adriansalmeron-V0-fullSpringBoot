@@ -1,0 +1,5 @@
+com/asf/formationtuto/model/exception/TechnicalException.class
+com/asf/formationtuto/model/exception/FunctionalException.class
+com/asf/formationtuto/model/bean/User/User.class
+com/asf/formationtuto/model/bean/User/Member.class
+com/asf/formationtuto/model/exception/NotFoundException.class

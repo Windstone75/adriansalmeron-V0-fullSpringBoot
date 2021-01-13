@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerFragment">
+    <title>Accueil</title>
+    <!-- metas, link and scripts -->
+</head>
+<body>
+<div class="container">
+
+ <h1 th:text="'Coucou ' + ${name} +'!'">Coucou John </h1>
+ 
+<h1>Connexion : </h1>
+        <form method="post" action="login">
+        	<p>
+            	<label for="login">login : </label>
+            	<input type="text" name="login" id="login" />
+            </p>
+            
+            <p>
+            	<label for="pass">Mot de passe : </label>
+            	<input type="password" name="pass" id="pass" />
+            </p>
+         <input type="submit" />
+        </form>
+   
+
+   
+</div>
+</body>
+</html>

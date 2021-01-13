@@ -1,0 +1,317 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- =============================================================== -->
+	<!-- Informations du projet -->
+	<!-- =============================================================== -->
+
+	<!-- ===== Informations Maven ===== -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.asf.bricotuto</groupId>
+	<artifactId>bricotuto</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<!-- ===== Informations générales ===== -->
+	<name>${projectName}</name>
+	<url>http://exemple.com</url>
+	<description>
+       Projet permettant la gestion des formations sur le bricolage
+    </description>
+
+	<organization>
+		<name>SocieteSF</name>
+		<url>https://SocieteSF.com</url>
+	</organization>
+
+	<!-- =============================================================== -->
+	<!-- DistributionManagement -->
+	<!-- =============================================================== -->
+	<distributionManagement>
+		<site>
+			<id>site-projet</id>
+			<url>scp://localhost/tmp/</url>
+		</site>
+	</distributionManagement>
+
+	<!-- =============================================================== -->
+	<!-- Propriétés -->
+	<!-- =============================================================== -->
+	<properties>
+		<projectName>BricoTuto</projectName>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<!-- =============================================================== -->
+	<!-- Modules -->
+	<!-- =============================================================== -->
+
+	<modules>
+		<module>bricotuto-webapp</module>
+		<module>bricotuto-model</module>
+	</modules>
+
+	<!-- =============================================================== -->
+	<!-- Gestion des dépendances -->
+	<!-- =============================================================== -->
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- ===== Modules ===== -->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>bricotuto-webapp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>bricotuto-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+
+
+			<!-- ===== Bibliothèques tierces ===== -->
+			<!-- Test -->
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.13</version>
+				<scope>test</scope>
+			</dependency>
+
+
+			<!-- lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<optional>true</optional>
+			</dependency>
+
+
+			<!-- ===== Gestion des log ===== -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.6</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.6.2</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>2.6.2</version>
+				<scope>runtime</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+	<!-- =============================================================== -->
+	<!-- Build -->
+	<!-- =============================================================== -->
+	<build>
+		<!-- ===== Gestion des plugins ===== -->
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+
+				<!-- =============================================================== -->
+				<!-- Code projet V0 a garder ??-->
+				<!-- =============================================================== -->
+			
+
+				<!-- Packaging JAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+
+				<!-- Compilation des sources Java -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+					</configuration>
+				</plugin>
+
+				<!-- Packaging WAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
+				<!-- Assemblage -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
+				<!-- Site -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.6</version>
+					<configuration>
+						<locales>fr</locales>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- =============================================================== -->
+	<!-- Gestion des rapports -->
+	<!-- =============================================================== -->
+	<reporting>
+		<plugins>
+
+			<!-- ===== Rapport d'information général sur le projet ===== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>4.0.0</version>
+			</plugin>
+
+			<!-- <===== Rapport sur les tests ===== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<reportSets>
+
+					<!-- reportSet d'agrégation des rapports des sous-projets (modules) -->
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+						<!-- ne pas exécuter ce sous-rapport dans les sous-projets -->
+						<inherited>false</inherited>
+						<configuration>
+							<aggregate>true</aggregate>
+						</configuration>
+					</reportSet>
+
+					<!-- reportSet non agrégé, exécuté dans tous les sous-projets (modules) -->
+					<reportSet>
+						<id>modules</id>
+						<!-- exécuter ce sous-rapport dans les sous-projets -->
+						<inherited>true</inherited>
+						<reports>
+							<report>report</report>
+						</reports>
+						<configuration>
+							<aggregate>false</aggregate>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- ==== Génération de la Javadoc ===== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<quiet>true</quiet>
+					<locale>fr</locale>
+					<skip>true</skip>
+				</configuration>
+				<reportSets>
+					<!-- reportSet exécuté dans tous les modules -->
+					<reportSet>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+					<!-- reportSet d'agrégation des rapports des sous-modules -->
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- ===== Rapport d'analyse du code par Checkstyle ===== -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<configLocation>src/build/checkstyle.xml</configLocation>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<reportSets>
+					<!-- reportSet exécuté dans tous les modules -->
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+					<!-- reportSet d'agrégation des rapports des sous-modules -->
+					<reportSet>
+						<id>checkstyle-aggregate</id>
+						<inherited>false</inherited>
+						<configuration>
+							<skipExec>true</skipExec>
+						</configuration>
+						<reports>
+							<report>checkstyle-aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
