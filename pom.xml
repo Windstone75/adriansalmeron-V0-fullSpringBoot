@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -49,6 +50,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring.version>4.3.11.RELEASE</spring.version>
 	</properties>
 
 	<!-- =============================================================== -->
@@ -58,6 +60,7 @@
 	<modules>
 		<module>bricotuto-webapp</module>
 		<module>bricotuto-model</module>
+		<module>bricotuto-business</module>
 	</modules>
 
 	<!-- =============================================================== -->
@@ -78,11 +81,41 @@
 				<artifactId>bricotuto-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
-
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>bricotuto-business</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 
 			<!-- ===== Bibliothèques tierces ===== -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+
+
+            
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<!-- Annotation JSR-250  -->
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>javax.annotation-api</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<!-- Annotation JSR-330 -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+
 			<!-- Test -->
 
 			<dependency>
@@ -93,7 +126,7 @@
 			</dependency>
 
 
-			<!-- lombok -->
+			<!-- lombok optimisation classe -->
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
@@ -156,9 +189,9 @@
 				</plugin>
 
 				<!-- =============================================================== -->
-				<!-- Code projet V0 a garder ??-->
+				<!-- Code projet V0 a garder ?? -->
 				<!-- =============================================================== -->
-			
+
 
 				<!-- Packaging JAR -->
 				<plugin>

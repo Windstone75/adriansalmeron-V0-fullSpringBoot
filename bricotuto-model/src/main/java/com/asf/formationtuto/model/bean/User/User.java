@@ -27,7 +27,6 @@ public class User {
 		this.dateInscription = new Date();
 	}
 
-
 	public long getUserId() {
 		return userId;
 	}
