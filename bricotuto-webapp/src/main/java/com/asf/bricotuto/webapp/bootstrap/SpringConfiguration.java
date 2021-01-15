@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource({"classpath*:applicationContext.xml"})
+@ImportResource("classpath:/bootstrapContext.xml")
+@ComponentScan("com.asf.bricotuto.webapp")
 public class SpringConfiguration {
 
-//@ComponentScan("com.asf.bricotuto.webapp")
+//
 }
