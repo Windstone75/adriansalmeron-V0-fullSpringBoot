@@ -8,7 +8,6 @@ public abstract class AbstractResource {
     private static ManagerFactory managerFactory;
 
     public static ManagerFactory getManagerFactory() {
-    	System.out.println("Abstract getManagerFactory : " + managerFactory);
         return managerFactory;
     }
 

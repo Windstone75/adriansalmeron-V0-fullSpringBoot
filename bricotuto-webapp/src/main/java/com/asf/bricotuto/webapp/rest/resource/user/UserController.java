@@ -19,7 +19,7 @@ public class UserController extends AbstractResource{
     	
     	User vUser = getManagerFactory().getUserManager().getUser(3);
         model.addAttribute("name", vUser.getLogin());
-        
+        System.out.println(vUser.toString());
         return "hello";
     }
 }

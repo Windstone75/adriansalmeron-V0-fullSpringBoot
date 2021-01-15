@@ -70,5 +70,12 @@ public class User {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	@Override
+	public String toString() {
+		String result = "User : \n -->id :"+this.userId+"\n -->login : "+this.login+"\n -->Password : "+this.pass;;
+		// TODO Auto-generated method stub
+		return result;
+	}
 
 }

@@ -1,6 +1,7 @@
 package com.asf.bricotuto.business.impl.manager;
 
 import com.asf.bricotuto.business.contract.manager.UserManager;
+import com.asf.bricotuto.consumer.impl.dao.UserDaoImpl;
 import com.asf.formationtuto.model.bean.User.User;
 
 
@@ -21,8 +22,9 @@ public User   getUser(Integer pId) {
 	//System.out.println("userdao :"+userDao);
 	//User user= userDao.findById(1);
 	//System.out.println("user :"+userDao);
+	
 
-	return user;
+	return new UserDaoImpl().getUser(22);
 }
 
 @Override
