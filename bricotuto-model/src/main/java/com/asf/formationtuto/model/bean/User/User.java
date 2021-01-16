@@ -5,25 +5,25 @@ import java.util.Date;
 public class User {
 	private long userId;
 	private String login;
-	private String pass;
+	private String password;
 	private Date dateInscription;
 	private Date updateDate;
 
 	public User() {
 	}
 
-	public User(long userId, String login, String pass, Date dateInscription) {
+	public User(long userId, String login, String password, Date dateInscription) {
 		super();
 		this.userId = userId;
 		this.login = login;
-		this.pass = pass;
+		this.password = password;
 		this.dateInscription = dateInscription;
 	}
 
-	public User(String login, String pass) {
+	public User(String login, String password) {
 		super();
 		this.login = login;
-		this.pass = pass;
+		this.password = password;
 		this.dateInscription = new Date();
 	}
 
@@ -45,12 +45,12 @@ public class User {
 	}
 
 
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String pass) {
+		this.password = pass;
 	}
 
 
@@ -73,7 +73,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		String result = "User : \n -->id :"+this.userId+"\n -->login : "+this.login+"\n -->Password : "+this.pass;;
+		String result = "User : \n -->id :"+this.userId+"\n -->login : "+this.login+"\n -->Password : "+this.password;;
 		// TODO Auto-generated method stub
 		return result;
 	}

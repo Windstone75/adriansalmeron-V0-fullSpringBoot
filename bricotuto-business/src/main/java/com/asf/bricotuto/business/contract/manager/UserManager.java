@@ -6,5 +6,5 @@ public interface UserManager {
 
     User getUser(Integer pId);
 
-    boolean verifierIdentifiants(String login, String passe);
+    User verifierIdentifiants(String login, String passe);
 }

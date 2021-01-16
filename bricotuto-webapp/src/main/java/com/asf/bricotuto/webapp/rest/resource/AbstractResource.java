@@ -1,7 +1,6 @@
 package com.asf.bricotuto.webapp.rest.resource;
 
 import com.asf.bricotuto.business.contract.ManagerFactory;
-import com.asf.bricotuto.business.impl.ManagerFactoryImpl;
 
 public abstract class AbstractResource {
 	

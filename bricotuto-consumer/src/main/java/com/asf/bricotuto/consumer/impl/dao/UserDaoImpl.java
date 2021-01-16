@@ -11,4 +11,10 @@ public class UserDaoImpl implements UserDao {
 
         return user;
     }
+    
+    @Override
+    public User findByLogin(String login) {
+        User user=new User("dao","dao123");
+        return user;
+    }
 }

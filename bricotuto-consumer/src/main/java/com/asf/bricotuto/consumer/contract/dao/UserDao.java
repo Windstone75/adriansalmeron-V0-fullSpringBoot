@@ -4,4 +4,6 @@ import com.asf.formationtuto.model.bean.User.User;
 
 public interface UserDao {
 User getUser(Integer pId) ;
+
+User findByLogin(String login);
 }

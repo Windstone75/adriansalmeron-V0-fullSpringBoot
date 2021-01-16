@@ -1,13 +1,14 @@
-package com.asf.bricodepot.webapp;
+package com.asf.bricotuto.webapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
+class BricoTutoWebApplicationTests {
 
-class BricoTutoWebAppTest {
-
-	@Test
+@Test
 	void contextLoads() {
+	
 	}
 
 }
