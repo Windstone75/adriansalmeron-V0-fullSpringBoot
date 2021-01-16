@@ -6,7 +6,9 @@ import com.asf.formationtuto.model.bean.User.User;
 public class UserDaoImpl implements UserDao {
     @Override
     public User getUser(Integer pId) {
+        User user=new User("UserDao","PassDao");
+        user.setUserId(pId);
 
-        return new User("UserDao","PassDao");
+        return user;
     }
 }

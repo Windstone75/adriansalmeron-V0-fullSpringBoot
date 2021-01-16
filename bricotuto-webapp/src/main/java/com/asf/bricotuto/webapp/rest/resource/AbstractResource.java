@@ -1,6 +1,7 @@
 package com.asf.bricotuto.webapp.rest.resource;
 
-import com.asf.bricotuto.business.impl.ManagerFactory;
+import com.asf.bricotuto.business.contract.ManagerFactory;
+import com.asf.bricotuto.business.impl.ManagerFactoryImpl;
 
 public abstract class AbstractResource {
 	
@@ -11,10 +12,9 @@ public abstract class AbstractResource {
         return managerFactory;
     }
 
-
     public static void setManagerFactory(ManagerFactory pManagerFactory) {
-    	System.out.println("setManagerFactory");
         managerFactory = pManagerFactory;
+        System.out.println("On inject un ManagerFactory dans AbstractResource");
     }
 }
 

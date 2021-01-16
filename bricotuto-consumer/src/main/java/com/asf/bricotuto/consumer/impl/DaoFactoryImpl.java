@@ -3,6 +3,7 @@ package com.asf.bricotuto.consumer.impl;
 import com.asf.bricotuto.consumer.contract.DaoFactory;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 
+
 public class DaoFactoryImpl implements DaoFactory {
 
     private UserDao userDao;
@@ -17,9 +18,9 @@ public class DaoFactoryImpl implements DaoFactory {
     }
 
     @Override
-    public void setUserManager(UserDao userDao) {
-        System.out.println("On set un UserDao dans la dao factory");
-        this.userDao = userDao;
+    public void setUserDao(UserDao userDao) {
+      this.userDao = userDao;
+        System.out.println("On inject un UserDao dans DaoFactory");
     }
 
 }

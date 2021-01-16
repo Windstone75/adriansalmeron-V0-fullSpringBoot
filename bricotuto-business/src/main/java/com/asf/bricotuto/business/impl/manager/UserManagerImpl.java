@@ -1,14 +1,15 @@
 package com.asf.bricotuto.business.impl.manager;
 
 import com.asf.bricotuto.business.contract.manager.UserManager;
+import com.asf.bricotuto.business.impl.AbstractManager;
 import com.asf.bricotuto.consumer.impl.dao.UserDaoImpl;
 import com.asf.formationtuto.model.bean.User.User;
 
 
-public class UserManagerImpl implements UserManager {
+public class UserManagerImpl extends AbstractManager implements UserManager {
 
  public UserManagerImpl() {
-	 System.out.println("On implemente un User manager");
+	 System.out.println("On implemente un UserManager");
 }
 
 @Override
@@ -22,9 +23,7 @@ public User   getUser(Integer pId) {
 	//System.out.println("userdao :"+userDao);
 	//User user= userDao.findById(1);
 	//System.out.println("user :"+userDao);
-	
-
-	return new UserDaoImpl().getUser(22);
+	return getDaoFactory().getUserDao().getUser(12);
 }
 
 @Override

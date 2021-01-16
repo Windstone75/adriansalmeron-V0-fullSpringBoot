@@ -5,8 +5,11 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Inclusion d'autres fichiers de contexte Spring -->
-    <import resource="com/asf/bricotuto/webapp/webappContext.xml" />
-    <import resource="com/asf/bricotuto/business/businessContext.xml"/>
-    <import resource="com/asf/bricotuto/consumer/consumerContext.xml"/>
+    <!-- ===== Déclaration des DAO ===== -->
+    <bean id="userDao" class="com.asf.bricotuto.consumer.impl.dao.UserDaoImpl"/>
+
+    <!-- ===== DaoFactory ===== -->
+    <bean id="daoFactory" class="com.asf.bricotuto.consumer.impl.DaoFactoryImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
 </beans>

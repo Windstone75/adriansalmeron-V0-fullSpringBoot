@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.asf.bricotuto.business.impl.ManagerFactory;
 import com.asf.bricotuto.webapp.rest.resource.AbstractResource;
 import com.asf.formationtuto.model.bean.User.User;
 
