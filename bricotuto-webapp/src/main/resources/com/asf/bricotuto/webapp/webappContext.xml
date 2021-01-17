@@ -8,7 +8,7 @@
 	<bean
 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="targetClass"
-			value="com.asf.bricotuto.webapp.rest.resource.AbstractResource" />
+			value="com.asf.bricotuto.webapp.service.AbstractResource" />
 		<property name="targetMethod" value="setManagerFactory" />
 		<property name="arguments" ref="managerFactory" />
 	</bean>

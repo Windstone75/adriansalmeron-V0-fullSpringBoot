@@ -1,6 +1,6 @@
 package com.asf.bricotuto.business.contract.manager;
 
-import com.asf.formationtuto.model.bean.User.User;
+import com.asf.bricotuto.model.bean.User.User;
 
 public interface UserManager {
 
