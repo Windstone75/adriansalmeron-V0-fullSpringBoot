@@ -1,4 +1,4 @@
-package com.asf.bricotuto.business.bootstrap;
+package com.asf.bricotuto.business.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

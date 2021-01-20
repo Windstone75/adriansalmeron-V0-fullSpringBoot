@@ -1,4 +1,4 @@
-package com.asf.bricotuto.webapp;
+package com.asf.bricotuto.webapp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,19 +11,19 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ImportResource("classpath:/bootstrapContext.xml")
 @ComponentScan(basePackages = "com.asf.bricotuto")
-public class BricoTutoWebAppConfig extends WebMvcConfigurationSupport{	
+public class JspAppConfig extends WebMvcConfigurationSupport{	
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry reg) {
-		reg.addResourceHandler("imgs/**", "css/**")
-		.addResourceLocations("classpath:/static/images", "classpath:/static/css/");
+		reg.addResourceHandler("imgages/**", "css/**")
+		.addResourceLocations("/WEB-INF/images", "/WEB-INF/css/");
 	}
 	
 	@Bean
 	public InternalResourceViewResolver jspPageViewResolver() {
 		InternalResourceViewResolver jspViewResolver = new InternalResourceViewResolver();
 		jspViewResolver.setViewClass(JstlView.class);
-		jspViewResolver.setPrefix("/WEB-INF/JSP/");
+		jspViewResolver.setPrefix("/WEB-INF/jsp/");
 		jspViewResolver.setSuffix(".jsp");
 		return jspViewResolver;
 	}

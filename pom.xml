@@ -93,22 +93,8 @@
 				<version>${project.version}</version>
 			</dependency>
 
-
 			<!-- ===== Bibliothèques tierces ===== -->
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.1.0</version>
-				<scope>provided</scope>
-			</dependency>
-
-
-            
-			<dependency>
-				<groupId>javax.ws.rs</groupId>
-				<artifactId>javax.ws.rs-api</artifactId>
-				<version>2.1</version>
-			</dependency>
+		
 			<!-- Annotation JSR-250  -->
 			<dependency>
 				<groupId>javax.annotation</groupId>
@@ -123,7 +109,6 @@
 			</dependency>
 
 			<!-- Test -->
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

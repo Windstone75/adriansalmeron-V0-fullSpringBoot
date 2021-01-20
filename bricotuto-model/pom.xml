@@ -19,15 +19,4 @@
 	<!-- ===== Informations générales ===== -->
 	<name>${projectName} - Model</name>
 
-	<!-- =============================================================== -->
-	<!-- Dépendances -->
-	<!-- =============================================================== -->
-	<dependencies>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-		</dependency>	
-			
-	</dependencies>
 </project>

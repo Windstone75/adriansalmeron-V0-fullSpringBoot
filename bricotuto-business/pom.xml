@@ -32,13 +32,15 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>${project.parent.artifactId}-consumer</artifactId>
 		</dependency>
-		
 
 		<!-- ===== Bibliothèques tierces ===== -->
+		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- DevTools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -46,12 +48,13 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- JSR-250 -->
+		<!-- JSR-250 (annotation) -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
 		</dependency>
-		<!-- JSR-330 -->
+
+		<!-- JSR-330 (injection dépendance) -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -63,18 +66,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
-		 <dependency>
-        <groupId>org.apache.tomcat.embed</groupId>
-        <artifactId>tomcat-embed-jasper</artifactId>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-    </dependency>
-
 
 	</dependencies>
 
