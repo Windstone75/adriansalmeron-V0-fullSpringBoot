@@ -1,10 +1,16 @@
 package com.asf.bricotuto.business.contract.manager;
 
-import com.asf.bricotuto.model.bean.User.User;
+import java.util.List;
+
+import com.asf.bricotuto.model.bean.User.AppUser;
 
 public interface UserManager {
 
-    User getUser(Integer pId);
+    AppUser getUser(Integer pId);
 
-    User verifierIdentifiants(String login, String passe);
+    AppUser verifierIdentifiants(String login, String passe);
+
+	AppUser findByLogin(String login);
+
+	List<String> getRoleNames(Long userId);
 }

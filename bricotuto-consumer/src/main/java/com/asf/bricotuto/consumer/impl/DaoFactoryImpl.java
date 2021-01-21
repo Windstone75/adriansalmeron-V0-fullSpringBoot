@@ -1,12 +1,14 @@
 package com.asf.bricotuto.consumer.impl;
 
 import com.asf.bricotuto.consumer.contract.DaoFactory;
+import com.asf.bricotuto.consumer.contract.dao.RoleDao;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 
 
 public class DaoFactoryImpl implements DaoFactory {
 
     private UserDao userDao;
+    private RoleDao roleDao;
 
     public DaoFactoryImpl() {
         System.out.println("On implemente un DaoFactory");
@@ -22,5 +24,17 @@ public class DaoFactoryImpl implements DaoFactory {
       this.userDao = userDao;
         System.out.println("On inject un UserDao dans DaoFactory");
     }
+
+	@Override
+	public RoleDao getRoleDao() {
+		 return this.roleDao;
+	}
+
+	@Override
+	public void setRoleDao(RoleDao roleDao) {
+		 this.roleDao = roleDao;
+	        System.out.println("On inject un RoleDao dans DaoFactory");
+		
+	}
 
 }

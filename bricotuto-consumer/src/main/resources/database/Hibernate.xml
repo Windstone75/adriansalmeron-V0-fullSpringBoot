@@ -17,12 +17,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
          <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
          <prop key="hibernate.show_sql">true</prop>
          <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <!--  <prop key="hibernate.hbm2ddl.auto">create</prop>  pour recreer la base-->
        </props>
      </property>
     	
      <property name="mappingResources">
     <list>
-           <value>/hibernate/User.hbm.xml</value>
+           <value>/hibernate/UserRole.hbm.xml</value>
     </list>
       </property>	
 

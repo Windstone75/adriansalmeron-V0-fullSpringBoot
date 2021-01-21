@@ -5,9 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
+import javax.sql.DataSource;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -18,16 +21,32 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 import com.asf.bricotuto.consumer.impl.rowmapper.ticket.UserRM;
-import com.asf.bricotuto.model.bean.User.User;
+import com.asf.bricotuto.model.bean.User.AppUser;
 
 public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
+	
 	@Override
-	public User getUser(Integer pId) {
+	public AppUser getUser(Integer pId) {
 
 		// TODO Auto-generated method stub
 		return null;
 	}
+	   @Override
+	public AppUser findByLogin(String userName) {
+			NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());			
+	        String sql = UserRM.BASE_SQL + " WHERE  login = :login ";
+	        RowMapper<AppUser> vRowMapper = new UserRM();
+	        MapSqlParameterSource vParams = new MapSqlParameterSource();
+			vParams.addValue("login", userName);
+		     try {
+		    	 AppUser userInfo = vJdbcTemplate.queryForObject(sql, vParams,vRowMapper);
+		            return userInfo;
+		        } catch (EmptyResultDataAccessException e) {
+		            return null;
+		        }         
+	        
+	    }
 
 	@Override
 	public int getCountUser() {
@@ -37,12 +56,12 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void save(User user) {
+	public void save(AppUser user) {
 
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(AppUser user) {
 		String vSQL = "UPDATE user SET login = :login, password = :password , update_dt = :update_dt"
 				+ "WHERE user_id= :id";
 
@@ -54,38 +73,36 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 
 		NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
 		vJdbcTemplate.update(vSQL, vParams);
-
 	}
 
 	@Override
-	public void delete(User user) {
+	public void delete(AppUser user) {
 	}
 
 	@Override
-	public User findByLoginPassword(String login, String password) {
+	public AppUser findByLoginPassword(String login, String password) {
 
-		String vSQL = "SELECT * FROM user WHERE login = :login  AND password = :password";
+		String vSQL = UserRM.BASE_SQL + " WHERE login = :login  AND password = :password";
 		MapSqlParameterSource vParams = new MapSqlParameterSource();
 		vParams.addValue("login", login);
 		vParams.addValue("password", password);
 
 		NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-		RowMapper<User> vRowMapper = new UserRM();
-		List<User> users = vJdbcTemplate.query(vSQL, vParams, vRowMapper);
+		RowMapper<AppUser> vRowMapper = new UserRM();
+		List<AppUser> users = vJdbcTemplate.query(vSQL, vParams, vRowMapper);
 		
 		if (users != null && users.size() == 1) {
 			return users.get(0);
 		}
 		return null;
-
 	}
 
 	@Override
-	public List<User> getListUser() {
+	public List<AppUser> getListUser() {
 		String vSQL = "SELECT * FROM user";
 		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
-		RowMapper<User> vRowMapper = new UserRM();
-		List<User> vListStatut = vJdbcTemplate.query(vSQL, vRowMapper);
+		RowMapper<AppUser> vRowMapper = new UserRM();
+		List<AppUser> vListStatut = vJdbcTemplate.query(vSQL, vRowMapper);
 		return vListStatut;
 	}
 

@@ -12,5 +12,7 @@
 		<property name="targetMethod" value="setManagerFactory" />
 		<property name="arguments" ref="managerFactory" />
 	</bean>
+	
+	<bean id="userDetailsServiceImpl" class="com.asf.bricotuto.webapp.service.user.UserDetailsServiceImpl" />
 
 </beans>

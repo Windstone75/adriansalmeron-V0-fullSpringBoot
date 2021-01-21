@@ -1,9 +1,11 @@
 package com.asf.bricotuto.model.bean.User;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.io.Serializable;
 
 
-public class User implements Serializable{
+public class AppUser implements Serializable{
 	/**
 	 * 
 	 */
@@ -13,11 +15,17 @@ public class User implements Serializable{
 	private String password;
 	private Date inscriptionDt;
 	private Date updateDt;
+	private Set roles = new HashSet();
 
-	public User() {
+	public AppUser() {
 	}
+	  public AppUser(Long userId, String login, String password) {
+	        this.userId = userId;
+	        this.login = login;
+	        this.password = password;
+	    }
 
-	public User(long userId, String login, String password, Date dateInscription) {
+	public AppUser(long userId, String login, String password, Date dateInscription) {
 		super();
 		this.userId = userId;
 		this.login = login;
@@ -25,7 +33,7 @@ public class User implements Serializable{
 		this.inscriptionDt = dateInscription;
 	}
 
-	public User(String login, String password) {
+	public AppUser(String login, String password) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -76,11 +84,21 @@ public class User implements Serializable{
 		this.updateDt = updateDate;
 	}
 	
+	public Set getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set roles) {
+		this.roles = roles;
+	}
+	
 	@Override
 	public String toString() {
-		String result = "User : \n -->id :"+this.userId+"\n -->login : "+this.login+"\n -->Password : "+this.password;;
+		String result = "AppUser : \n -->id :"+this.userId+"\n -->login : "+this.login+"\n -->Password : "+this.password;;
 		// TODO Auto-generated method stub
 		return result;
 	}
+
+	
 
 }

@@ -1,33 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>   
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registration</title>
-</head>
-<body>
-    <div align="center">
-        <form:form action="login" method="post" modelAttribute="userForm">
-            <table border="0">
-                <tr>
-                    <td colspan="2" align="center"><h2>Connection : </h2></td>
-                </tr>
-                <tr>
-                    <td>User Name:</td>
-                    <td><form:input path="login" /></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><form:password path="password" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Register" /></td>
-                </tr>
-            </table>
-        </form:form>
-    </div>
+<body onload='document.loginForm.username.focus();'>
+	<h3>JournalDEV Tutorials</h3>
+
+	<c:if test="${not empty error}"><div>${error}</div></c:if>
+	<c:if test="${not empty message}"><div>${message}</div></c:if>
+
+	<form name='login' action="<c:url value='/login' />" method='post'>
+		<table>
+			<tr>
+				<td>UserName:</td>
+				<td><input type='text' name='username' value=''></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type='password' name='password' /></td>
+			</tr>
+			<tr>
+				<td colspan='2'><input name="submit" type="submit" value="submit" /></td>
+			</tr>
+		</table>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
 </body>
 </html>
