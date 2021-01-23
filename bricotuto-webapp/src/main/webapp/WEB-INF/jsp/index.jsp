@@ -5,7 +5,8 @@
 
 <html lang="en">
 <head>
-<link href="css/style" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+                href="../css/style.css"/>
 <title>Accueil</title>
 <!-- metas, link and scripts -->
 </head>

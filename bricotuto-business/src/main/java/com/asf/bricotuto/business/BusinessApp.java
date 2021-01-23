@@ -18,7 +18,7 @@ public class BusinessApp
     ManagerFactory vManagerFactory
         = vApplicationContext.getBean("managerFactory", ManagerFactory.class);
 
-    // suite de l'implémentation des batches...**/
+    // suite de l'implémentation **/
 		SpringApplication.run(BusinessApp.class, args);
 	}
 }

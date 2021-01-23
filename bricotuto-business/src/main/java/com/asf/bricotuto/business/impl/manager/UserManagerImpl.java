@@ -9,7 +9,6 @@ import com.asf.bricotuto.model.bean.User.AppUser;
 public class UserManagerImpl extends AbstractManager implements UserManager {
 
 	public UserManagerImpl() {
-		System.out.println("On implemente un UserManager");
 	}
 
 	@Override

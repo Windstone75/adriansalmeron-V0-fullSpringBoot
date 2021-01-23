@@ -51,12 +51,11 @@ public class LoginController {
                     + " : You do not have permission to access this page!";
             model.addAttribute("userInfo", userInfo); 
             model.addAttribute("message", message); 
-        }
- 
+        } 
         return "403Page";
     }
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    
+	@RequestMapping(value = { "/{locale:en|fr|es}/login","/login" }, method = RequestMethod.GET)
 	public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
 	@RequestParam(value = "logout",	required = false) String logout) {
 		

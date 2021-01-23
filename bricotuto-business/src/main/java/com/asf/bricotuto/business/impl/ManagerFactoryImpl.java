@@ -9,7 +9,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
 	private UserManager userManager;
 	
 	public ManagerFactoryImpl() {
-		 System.out.println("On implemente un ManagerFactory");
 	}
 
 	@Override
@@ -19,7 +18,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
 
    @Override
    public void setUserManager(UserManager userManager) {
-	   System.out.println("On inject un UserManager dans ManagerFactory");
         this.userManager = userManager;
     }
 

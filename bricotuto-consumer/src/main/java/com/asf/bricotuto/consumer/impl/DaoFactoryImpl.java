@@ -10,8 +10,7 @@ public class DaoFactoryImpl implements DaoFactory {
     private UserDao userDao;
     private RoleDao roleDao;
 
-    public DaoFactoryImpl() {
-        System.out.println("On implemente un DaoFactory");
+    public DaoFactoryImpl() {       
     }
 
     @Override
@@ -22,7 +21,6 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public void setUserDao(UserDao userDao) {
       this.userDao = userDao;
-        System.out.println("On inject un UserDao dans DaoFactory");
     }
 
 	@Override
@@ -32,9 +30,7 @@ public class DaoFactoryImpl implements DaoFactory {
 
 	@Override
 	public void setRoleDao(RoleDao roleDao) {
-		 this.roleDao = roleDao;
-	        System.out.println("On inject un RoleDao dans DaoFactory");
-		
+		 this.roleDao = roleDao;		
 	}
 
 }

@@ -1,28 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<body onload='document.loginForm.username.focus();'>
-	<h3>JournalDEV Tutorials</h3>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 
-	<c:if test="${not empty error}"><div>${error}</div></c:if>
-	<c:if test="${not empty message}"><div>${message}</div></c:if>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title><spring:message code="label.title" /></title>
+</head>
+<body>
+
+	 <div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+       <a href="${pageContext.request.contextPath}/en/login">Login (English)</a>
+       &nbsp;|&nbsp;
+       <a href="${pageContext.request.contextPath}/fr/login">Login (French)</a>
+       &nbsp;|&nbsp;
+       <a href="${pageContext.request.contextPath}/es/login">Login (Spanish)</a>
+    </div>
+
+	<c:if test="${not empty error}">
+		<div>${error}</div>
+	</c:if>
+	<c:if test="${not empty message}">
+		<div>${message}</div>
+	</c:if>
 
 	<form name='login' action="<c:url value='/login' />" method='post'>
 		<table>
 			<tr>
-				<td>UserName:</td>
-				<td><input type='text' name='username' value=''></td>
+				<td>
+					<strong> 
+					<spring:message code="label.userName" />
+					</strong>
+				</td>
+				<td>
+					<input type='text' name='username' value=''>
+				</td>
 			</tr>
 			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='password' /></td>
+				<td>
+					<strong> 
+					<spring:message code="label.password" />
+					</strong>
+				</td>
+				<td>
+					<input type='password' name='password' />
+				</td>
 			</tr>
 			<tr>
-				<td colspan='2'><input name="submit" type="submit" value="submit" /></td>
+				<td colspan="2">
+				<spring:message code="label.submit"	var="labelSubmit"></spring:message> 
+				<input name="submit" type="submit" value="${labelSubmit}" /></td>
 			</tr>
 		</table>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 	</form>
 </body>
 </html>

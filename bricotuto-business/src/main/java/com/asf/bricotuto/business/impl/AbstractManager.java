@@ -12,6 +12,5 @@ public abstract class AbstractManager {
 
     public static void setDaoFactory(DaoFactory pDaoFactory) {
         daoFactory = pDaoFactory;
-        System.out.println("On inject un DaoFactory dans AbstractManager");
     }
 }

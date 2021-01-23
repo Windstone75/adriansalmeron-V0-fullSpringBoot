@@ -13,7 +13,6 @@ public abstract class AbstractResource {
 
     public static void setManagerFactory(ManagerFactory pManagerFactory) {
         managerFactory = pManagerFactory;
-        System.out.println("On inject un ManagerFactory dans AbstractResource");
     }
 }
 

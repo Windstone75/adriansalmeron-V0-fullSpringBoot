@@ -17,6 +17,7 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+		System.out.println(login);
 		AppUser vUser = getManagerFactory().getUserManager().findByLogin(login);
 		 
         if (vUser == null) {

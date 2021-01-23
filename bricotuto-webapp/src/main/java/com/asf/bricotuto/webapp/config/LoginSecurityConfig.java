@@ -28,15 +28,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
 		
 		  // Setting Service to find User in the database.
-        // And Setting PassswordEncoder
-		authenticationMgr.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		
-		/*
-		 * authenticationMgr.inMemoryAuthentication()
-		 * .withUser("user").password("{noop}010203").authorities("ROLE_USER") .and()
-		 * .withUser("adrian").password("{noop}010203").authorities("ROLE_USER",
-		 * "ROLE_ADMIN");
-		 */
+		authenticationMgr.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());	
 	}
 	
 	@Override
