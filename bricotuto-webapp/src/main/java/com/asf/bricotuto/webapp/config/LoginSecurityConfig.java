@@ -35,8 +35,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers("/home").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-			.antMatchers("/user").access("hasRole('ROLE_USER')")
+			.antMatchers("/member").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 			.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
 			.and()
 				.formLogin().loginPage("/login")

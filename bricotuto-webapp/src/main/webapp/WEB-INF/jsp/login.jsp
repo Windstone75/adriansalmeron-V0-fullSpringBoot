@@ -9,17 +9,10 @@
 
 <meta charset="UTF-8">
 
-<title><spring:message code="label.title" /></title>
+<title><spring:message code="login.title" /></title>
 </head>
 <body>
-
-	 <div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
-       <a href="${pageContext.request.contextPath}/en/login">Login (English)</a>
-       &nbsp;|&nbsp;
-       <a href="${pageContext.request.contextPath}/fr/login">Login (French)</a>
-       &nbsp;|&nbsp;
-       <a href="${pageContext.request.contextPath}/es/login">Login (Spanish)</a>
-    </div>
+<%@ include file="menu.jsp" %>
 
 	<c:if test="${not empty error}">
 		<div>${error}</div>
@@ -33,7 +26,7 @@
 			<tr>
 				<td>
 					<strong> 
-					<spring:message code="label.userName" />
+					<spring:message code="login.userName" />
 					</strong>
 				</td>
 				<td>
@@ -43,7 +36,7 @@
 			<tr>
 				<td>
 					<strong> 
-					<spring:message code="label.password" />
+					<spring:message code="login.password" />
 					</strong>
 				</td>
 				<td>
@@ -52,7 +45,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-				<spring:message code="label.submit"	var="labelSubmit"></spring:message> 
+				<spring:message code="login.submit"	var="labelSubmit"></spring:message> 
 				<input name="submit" type="submit" value="${labelSubmit}" /></td>
 			</tr>
 		</table>

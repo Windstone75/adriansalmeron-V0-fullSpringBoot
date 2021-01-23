@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<%@ include file="menu.jsp" %>  
 	<c:if test="${message != null}" var="variable">
 		<h3 style="color: red;">
 			<c:out value="${ message }">Valeur par défaut</c:out>
