@@ -2,11 +2,16 @@ package com.asf.bricotuto.consumer.impl.dao;
 
 import java.util.List;
 
-
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.asf.bricotuto.consumer.contract.dao.RoleDao;
+import com.asf.bricotuto.consumer.impl.rowmapper.RoleRM;
+import com.asf.bricotuto.consumer.impl.rowmapper.UserRM;
+import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
 
 public class RoleDaoImpl extends AbstractDaoImpl implements RoleDao  {
@@ -24,5 +29,16 @@ public class RoleDaoImpl extends AbstractDaoImpl implements RoleDao  {
 		return roles;
    
     }
+    
+	@Override
+	public List<Role> getListRole() {
+		String vSQL = "SELECT * FROM role";
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
+		RowMapper<Role> vRowMapper = new RoleRM();
+		List<Role> vListRole = vJdbcTemplate.query(vSQL, vRowMapper);
+		return vListRole;
+	}
+
+
 
 }

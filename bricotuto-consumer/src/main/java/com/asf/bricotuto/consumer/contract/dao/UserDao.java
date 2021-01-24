@@ -7,8 +7,8 @@ import com.asf.bricotuto.model.bean.User.AppUser;
 public interface UserDao {
 
 	AppUser getUser(Integer pId);
-
-	int getCountUser();
+	
+	AppUser findByLogin(String userName);
 
 	void save(AppUser user);
 
@@ -16,10 +16,8 @@ public interface UserDao {
 
 	void delete(AppUser user);
 
-	AppUser findByLoginPassword(String login, String password);
+	int getCountUser();
 
-	List<AppUser> getListUser();
-
-	AppUser findByLogin(String userName);
+	List<AppUser> getListUser();	
 
 }

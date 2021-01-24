@@ -12,6 +12,7 @@
 
 	<!-- ===== Informations Maven ===== -->
 	<artifactId>bricotuto-webapp</artifactId>
+	<packaging>war</packaging>
 
 	<!-- ===== Informations générales ===== -->
 	<name>${projectName} - webapp</name>

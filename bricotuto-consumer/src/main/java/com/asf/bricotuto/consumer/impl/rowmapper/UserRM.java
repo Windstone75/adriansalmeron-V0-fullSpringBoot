@@ -1,4 +1,4 @@
-package com.asf.bricotuto.consumer.impl.rowmapper.ticket;
+package com.asf.bricotuto.consumer.impl.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

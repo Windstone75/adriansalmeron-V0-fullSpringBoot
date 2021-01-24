@@ -22,25 +22,15 @@
 
 	<!-- ===== Informations générales ===== -->
 	<name>${projectName}</name>
-	<url>http://exemple.com</url>
+	<url>http://bricotuto.com</url>
 	<description>
        Projet permettant la gestion des formations sur le bricolage
     </description>
 
 	<organization>
-		<name>SocieteSF</name>
-		<url>https://SocieteSF.com</url>
+		<name>SocieteASF</name>
+		<url>https://SocieteASF.com</url>
 	</organization>
-
-	<!-- =============================================================== -->
-	<!-- DistributionManagement -->
-	<!-- =============================================================== -->
-	<distributionManagement>
-		<site>
-			<id>site-projet</id>
-			<url>scp://localhost/tmp/</url>
-		</site>
-	</distributionManagement>
 
 	<!-- =============================================================== -->
 	<!-- Propriétés -->
@@ -94,8 +84,8 @@
 			</dependency>
 
 			<!-- ===== Bibliothèques tierces ===== -->
-		
-			<!-- Annotation JSR-250  -->
+
+			<!-- Annotation JSR-250 -->
 			<dependency>
 				<groupId>javax.annotation</groupId>
 				<artifactId>javax.annotation-api</artifactId>
@@ -153,6 +143,7 @@
 				<version>2.6.2</version>
 				<scope>runtime</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -183,19 +174,7 @@
 						</excludes>
 					</configuration>
 				</plugin>
-
-				<!-- =============================================================== -->
-				<!-- Code projet V0 a garder ?? -->
-				<!-- =============================================================== -->
-
-
-				<!-- Packaging JAR -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
-				</plugin>
-
+				
 				<!-- Compilation des sources Java -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -207,6 +186,14 @@
 					</configuration>
 				</plugin>
 
+
+				<!-- Packaging JAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+
 				<!-- Packaging WAR -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -214,22 +201,18 @@
 					<version>3.0.0</version>
 				</plugin>
 
-				<!-- Assemblage -->
+                <!-- Deploiement Tomcat WAR -->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-
-				<!-- Site -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.6</version>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
 					<configuration>
-						<locales>fr</locales>
+						<url>http://localhost:8080/manager/text</url>
+						<server>TomcatServer</server>
+						<path>/${projectName}</path>
 					</configuration>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>

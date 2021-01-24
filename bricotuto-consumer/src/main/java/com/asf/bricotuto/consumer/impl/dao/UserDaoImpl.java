@@ -20,7 +20,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
-import com.asf.bricotuto.consumer.impl.rowmapper.ticket.UserRM;
+import com.asf.bricotuto.consumer.impl.rowmapper.UserRM;
 import com.asf.bricotuto.model.bean.User.AppUser;
 
 public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
@@ -48,12 +48,6 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 	        
 	    }
 
-	@Override
-	public int getCountUser() {
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
-		int vNbrUser = vJdbcTemplate.queryForObject("SELECT COUNT(*) FROM user", Integer.class);
-		return vNbrUser;
-	}
 
 	@Override
 	public void save(AppUser user) {
@@ -78,23 +72,12 @@ public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
 	@Override
 	public void delete(AppUser user) {
 	}
-
+	
 	@Override
-	public AppUser findByLoginPassword(String login, String password) {
-
-		String vSQL = UserRM.BASE_SQL + " WHERE login = :login  AND password = :password";
-		MapSqlParameterSource vParams = new MapSqlParameterSource();
-		vParams.addValue("login", login);
-		vParams.addValue("password", password);
-
-		NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-		RowMapper<AppUser> vRowMapper = new UserRM();
-		List<AppUser> users = vJdbcTemplate.query(vSQL, vParams, vRowMapper);
-		
-		if (users != null && users.size() == 1) {
-			return users.get(0);
-		}
-		return null;
+	public int getCountUser() {
+		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
+		int vNbrUser = vJdbcTemplate.queryForObject("SELECT COUNT(*) FROM user", Integer.class);
+		return vNbrUser;
 	}
 
 	@Override
