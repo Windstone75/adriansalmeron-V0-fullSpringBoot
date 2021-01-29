@@ -1,92 +1,61 @@
 package com.asf.bricotuto.consumer.impl.dao;
 
-import java.sql.Types;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
-import javax.sql.DataSource;
-
-import org.hibernate.HibernateException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
-import com.asf.bricotuto.consumer.impl.rowmapper.UserRM;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
-public class UserDaoImpl extends AbstractDaoImpl implements UserDao {
+@Repository
+@Transactional
+public class UserDaoImpl extends AbstractDaoImpl<AppUser> implements UserDao {
 
-	
-	@Override
-	public AppUser getUser(Integer pId) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-	   @Override
-	public AppUser findByLogin(String userName) {
-			NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());			
-	        String sql = UserRM.BASE_SQL + " WHERE  login = :login ";
-	        RowMapper<AppUser> vRowMapper = new UserRM();
-	        MapSqlParameterSource vParams = new MapSqlParameterSource();
-			vParams.addValue("login", userName);
-		     try {
-		    	 AppUser userInfo = vJdbcTemplate.queryForObject(sql, vParams,vRowMapper);
-		            return userInfo;
-		        } catch (EmptyResultDataAccessException e) {
-		            return null;
-		        }         
-	        
-	    }
-
-
-	@Override
-	public void save(AppUser user) {
-
+	public UserDaoImpl() {
+		setClazz(AppUser.class);
 	}
 
 	@Override
-	public void update(AppUser user) {
-		String vSQL = "UPDATE user SET login = :login, password = :password , update_dt = :update_dt"
-				+ "WHERE user_id= :id";
-
-		MapSqlParameterSource vParams = new MapSqlParameterSource();
-		vParams.addValue("id", user.getUserId(), Types.INTEGER);
-		vParams.addValue("login", user.getLogin(), Types.VARCHAR);
-		vParams.addValue("password", user.getPassword(), Types.VARCHAR);
-		vParams.addValue("update_dt", new Date(), Types.DATE);
-
-		NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-		vJdbcTemplate.update(vSQL, vParams);
+	public AppUser findById(Long pId) {
+		AppUser user = findOne(pId);
+		//init validate fields MatchingPassword (not in database
+		user.setMatchingPassword(user.getPassword());
+		return user;
 	}
 
 	@Override
-	public void delete(AppUser user) {
-	}
-	
-	@Override
-	public int getCountUser() {
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
-		int vNbrUser = vJdbcTemplate.queryForObject("SELECT COUNT(*) FROM user", Integer.class);
-		return vNbrUser;
+	public AppUser findByEmail(String email) {
+		Session session = getCurrentSession();
+		AppUser user = null;
+		// query and criteria
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<AppUser> cr = cb.createQuery(AppUser.class);
+		Root<AppUser> root = cr.from(AppUser.class);
+		cr.select(root).where(cb.like(root.get("email"), email));
+		// execute query
+		Query<AppUser> query = session.createQuery(cr);
+		List<AppUser> results = query.getResultList();
+		if (results.size() == 1) {
+			user = results.get(0);
+			//init validate fields MatchingPassword (not in database)
+			user.setMatchingPassword(user.getPassword());
+		}
+		return user;
 	}
 
 	@Override
-	public List<AppUser> getListUser() {
-		String vSQL = "SELECT * FROM user";
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
-		RowMapper<AppUser> vRowMapper = new UserRM();
-		List<AppUser> vListStatut = vJdbcTemplate.query(vSQL, vRowMapper);
-		return vListStatut;
+	public List<String> getListRoleByUserId(Long userId) {
+		List<String> listerole = new ArrayList<String>();
+		AppUser user = findOne(userId);
+		for (Role r : user.getRoles()) {
+			listerole.add(r.getName());
+		}
+		return listerole;
 	}
-
 }

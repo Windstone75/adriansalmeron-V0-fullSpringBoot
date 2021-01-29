@@ -2,19 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- ==== Import Context===== -->
+	<import resource="consumerContext.xml" />
+
 	<!-- ==== AbstractManager===== -->
+	<bean id="abstractManager" abstract="true">
+		<property name="daoFactory" ref="daoFactory"></property>
+	</bean>
 
+	<!-- ===== Déclaration des Managers ===== -->
+	<bean id="userManager"
+		class="com.asf.bricotuto.business.impl.manager.UserManagerImpl"
+		parent="abstractManager" />
 
-<!-- ===== Déclaration des Managers ===== -->
-<bean id="abstractManager" abstract="true">
-	<property name="daoFactory" ref="daoFactory"></property>
-</bean>
-
-<bean id="userManager" class="com.asf.bricotuto.business.impl.manager.UserManagerImpl" parent="abstractManager"/>
-
-<!-- ===== ManagerFactory ===== -->
-<bean id="managerFactory" class="com.asf.bricotuto.business.impl.ManagerFactoryImpl">
-    <property name="userManager" ref="userManager"/>
-</bean>
+	<!-- ===== ManagerFactory ===== -->
+	<bean id="managerFactory"
+		class="com.asf.bricotuto.business.impl.ManagerFactoryImpl">
+		<property name="userManager" ref="userManager" />
+	</bean>
 
 </beans>

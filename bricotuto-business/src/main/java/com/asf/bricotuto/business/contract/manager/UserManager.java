@@ -3,19 +3,26 @@ package com.asf.bricotuto.business.contract.manager;
 import java.util.List;
 
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.ConfirmationToken;
 import com.asf.bricotuto.model.bean.User.Role;
 
 public interface UserManager {
 
-    AppUser getUser(Integer pId);
+    AppUser getUser(Long pId);
 
-	AppUser findByLogin(String login);
+	AppUser findByEmail(String email);
+	
+	ConfirmationToken saveNewUser(AppUser user);
 	
 	List<AppUser> getListUser();
 	
 	List<Role> getListRole();
 
-	List<String> getRoleNames(Long userId);
+	List<String> getRoleNamesByUserId(Long userId);
+
+	AppUser VerificationToken(String Token) throws Exception;
+
+
 
 	
 }

@@ -24,40 +24,51 @@
 		<%@ include file="menu.jsp"%>
 	</div>
 	<div class="main-content">
-	
-		<!-- Main content body  -->
-		<c:if test="${not empty error}">
-			<div>${error}</div>
-		</c:if>
-		<c:if test="${not empty message}">
-			<div>${message}</div>
-		</c:if>
 
-		<form name='login' action="<c:url value='/login' />" method='post'>
-			<table>
-				<tr>
-					<td><strong> <spring:message code="login.userName" />
-					</strong></td>
-					<td><input type='text' name='username' value=''></td>
-				</tr>
-				<tr>
-					<td><strong> <spring:message code="login.password" />
-					</strong></td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					<td colspan="2"><spring:message code="login.submit"
-							var="labelSubmit"></spring:message> <input name="submit"
-						type="submit" value="${labelSubmit}" /></td>
-				</tr>
-			</table>
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		
-	</div>
-	<div class="footer-content">
-		<%@ include file="footer.jsp"%>
+		<!-- Main content body  -->
+
+
+		<div class="login-form">
+			<form name='login' action="<c:url value='/login' />" method='post'>
+				<h2 class="text-center">
+				<spring:message code="menu.login" />
+				</h2>
+
+				<c:if test="${not empty error}">
+					<div>${error}</div>
+				</c:if>
+				<c:if test="${not empty message}">
+					<div>${message}</div>
+				</c:if>
+
+				<div class="form-group">
+					<input type="text" name='email' class="form-control"
+						placeholder="<spring:message code="login.email" />"
+						required="required">
+				</div>
+				<div class="form-group">
+					<input type="password" name='password' class="form-control"
+						placeholder="<spring:message code="login.password" />"
+						required="required">
+				</div>
+				<div class="form-group">
+					<button type="submit" value="" class="btn btn-primary btn-block">
+						<spring:message code="login.submit" />
+					</button>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</div>
+
+				<div class="clearfix">
+					<label class="float-left form-check-label"><input
+						type="checkbox"> Remember me</label> <a href="#"
+						class="float-right">Forgot Password?</a>
+				</div>
+			</form>
+		</div>
+		<p class="text-center">
+			<a href="/signup">Create an Account</a>
+		</p>
 	</div>
 </body>
 </html>

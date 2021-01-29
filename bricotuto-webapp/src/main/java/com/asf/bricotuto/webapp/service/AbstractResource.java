@@ -1,10 +1,12 @@
 package com.asf.bricotuto.webapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.asf.bricotuto.business.contract.ManagerFactory;
 
 public abstract class AbstractResource {
 	
-    
+	@Autowired
     private static ManagerFactory managerFactory;
 
     public static ManagerFactory getManagerFactory() {

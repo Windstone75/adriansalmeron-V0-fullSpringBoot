@@ -2,7 +2,6 @@ package com.asf.bricotuto.webapp.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -21,8 +20,7 @@ import com.asf.bricotuto.webapp.interceptor.UrlLocaleResolver;
 @EnableWebMvc
 @Configuration
 @Import(value = { LoginSecurityConfig.class })
-@ImportResource("classpath:/bootstrapContext.xml")
-@ComponentScan(basePackages = "com.asf.bricotuto")
+@ImportResource("classpath:/config/webappContext.xml")
 public class WebMvcConfig implements WebMvcConfigurer {
 
 	// *******************************************

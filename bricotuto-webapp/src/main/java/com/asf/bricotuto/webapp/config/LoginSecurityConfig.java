@@ -14,10 +14,9 @@ import com.asf.bricotuto.webapp.service.user.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-  
-	  @Autowired
-	    UserDetailsServiceImpl userDetailsService;
+	 @Autowired
+	 UserDetailsServiceImpl userDetailsService;
+	 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -41,7 +40,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin().loginPage("/login")
 				.defaultSuccessUrl("/home")
 				.failureUrl("/login?error")
-				.usernameParameter("username").passwordParameter("password")				
+				.usernameParameter("email").passwordParameter("password")				
 			.and()
 				.logout().logoutSuccessUrl("/login?logout")
 			.and()

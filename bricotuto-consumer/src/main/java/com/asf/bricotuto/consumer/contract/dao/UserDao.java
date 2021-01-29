@@ -1,23 +1,22 @@
 package com.asf.bricotuto.consumer.contract.dao;
 
 import java.util.List;
-
 import com.asf.bricotuto.model.bean.User.AppUser;
 
 public interface UserDao {
 
-	AppUser getUser(Integer pId);
-	
-	AppUser findByLogin(String userName);
+	List<AppUser> findAll();
 
 	void save(AppUser user);
 
-	void update(AppUser user);
+	AppUser update(AppUser user);
 
 	void delete(AppUser user);
 
-	int getCountUser();
+	AppUser findById(Long pId);
 
-	List<AppUser> getListUser();	
+	AppUser findByEmail(String email);
+
+	List<String> getListRoleByUserId(Long userId);
 
 }

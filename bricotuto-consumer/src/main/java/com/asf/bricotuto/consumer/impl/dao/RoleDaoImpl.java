@@ -2,43 +2,42 @@ package com.asf.bricotuto.consumer.impl.dao;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import com.asf.bricotuto.consumer.contract.dao.RoleDao;
-import com.asf.bricotuto.consumer.impl.rowmapper.RoleRM;
-import com.asf.bricotuto.consumer.impl.rowmapper.UserRM;
-import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.Role;
 
+public class RoleDaoImpl extends AbstractDaoImpl<Role> implements RoleDao {
 
-public class RoleDaoImpl extends AbstractDaoImpl implements RoleDao  {
-	
-    public List<String> getRoleNames(Long userId) {
-        String sql = "Select r.name " //
-                + " from user_role ur, role r " //
-                + " where ur.role_id = r.role_id and ur.user_Id = :userId ";
- 
-		MapSqlParameterSource vParams = new MapSqlParameterSource();
-		vParams.addValue("userId", userId);
-		
-		NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-		List<String> roles = vJdbcTemplate.queryForList(sql, vParams, String.class);
-		return roles;
-   
-    }
-    
-	@Override
-	public List<Role> getListRole() {
-		String vSQL = "SELECT * FROM role";
-		JdbcTemplate vJdbcTemplate = new JdbcTemplate(getDataSource());
-		RowMapper<Role> vRowMapper = new RoleRM();
-		List<Role> vListRole = vJdbcTemplate.query(vSQL, vRowMapper);
-		return vListRole;
+	public RoleDaoImpl() {
+		setClazz(Role.class);
 	}
 
-
-
+	@Override
+	public List<Role> getListRole() {
+		return findAll();
+	}
+	
+	@Override
+	public Role findByName(String name) {
+		Session session = getCurrentSession();
+		Role role = null;
+		// query and criteria
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Role> cr = cb.createQuery(Role.class);
+		Root<Role> root = cr.from(Role.class);
+		cr.select(root).where(cb.like(root.get("name"), name));
+		// execute query
+		Query<Role> query = session.createQuery(cr);
+		List<Role> results = query.getResultList();
+		if (results.size() == 1) {
+			role = results.get(0);
+		}
+		return role;
+	}
 }
