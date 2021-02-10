@@ -1,6 +1,6 @@
 package com.asf.bricotuto.consumer.contract;
 
-import com.asf.bricotuto.consumer.contract.dao.ConfirmationTokenDao;
+import com.asf.bricotuto.consumer.contract.dao.UserTokenDao;
 import com.asf.bricotuto.consumer.contract.dao.RoleDao;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 
@@ -12,9 +12,9 @@ public interface DaoFactory {
 	RoleDao getRoleDao();
 
 	void setRoleDao(RoleDao roleDao);
+	
+	UserTokenDao getUserTokenDao();
 
-	ConfirmationTokenDao getConfirmationTokenDao();
-
-	void setConfirmationTokenDao(ConfirmationTokenDao confirmationTokenDao);
+	
 
 }

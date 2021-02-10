@@ -70,9 +70,6 @@
 								src="/images/iconeSort.png" width="20" height="20" align="right" /></th>
 							<th data-type="string">inscriptionDt<img
 								src="/images/iconeSort.png" width="20" height="20" align="right" /></th>
-							<th data-type="string">updateDt <img
-								src="/images/iconeSort.png" width="20" height="20" align="right" />
-							</th>
 							<th data-type="string">Action</th>
 						</tr>
 					</thead>
@@ -85,9 +82,7 @@
 								<td>${user.email}</td>
 								<td>${user.enabled}</td>
 								<td>${user.inscriptionDt}</td>
-								<td>${user.updateDt}</td>
 								<td>update / delete</td>
-
 							</tr>
 						</c:forEach>
 					</tbody>

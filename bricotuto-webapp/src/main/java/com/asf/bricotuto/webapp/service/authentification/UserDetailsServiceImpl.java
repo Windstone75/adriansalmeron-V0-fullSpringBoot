@@ -1,4 +1,4 @@
-package com.asf.bricotuto.webapp.service.user;
+package com.asf.bricotuto.webapp.service.authentification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +25,10 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 		AppUser vUser = getManagerFactory().getUserManager().findByEmail(email);
 
 		if (vUser == null) {
-			throw new UsernameNotFoundException("No user found with username: " + email);
+			throw new UsernameNotFoundException("No user found with username: " + email);		
 		}
 
-		System.out.println("Found User: " + vUser);
-
-		List<String> roleNames = getManagerFactory().getUserManager().getRoleNamesByUserId(vUser.getUserId());
+		List<String> roleNames = getManagerFactory().getRoleManager().getRoleNamesByUserId(vUser.getUserId());
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		if (roleNames != null) {
 			for (String role : roleNames) {
@@ -42,7 +40,7 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 
 		UserDetails userDetails = (UserDetails) new User(vUser.getEmail(), vUser.getPassword(), vUser.isEnabled(),
 				accountNonExpired, credentialsNonExpired, accountNonLocked, grantList);
-
+		
 		return userDetails;
 	}
 

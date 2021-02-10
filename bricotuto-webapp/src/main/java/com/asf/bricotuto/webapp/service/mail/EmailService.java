@@ -28,4 +28,17 @@ public class EmailService {
 
     	sendEmail(mailMessage);
     }
+    
+    public void sendResetPasswordMail(String userMail, String token) {
+
+    	final SimpleMailMessage mailMessage = new SimpleMailMessage();
+    	mailMessage.setTo(userMail);
+    	mailMessage.setSubject("Mail resetPassword Link!");
+    	mailMessage.setFrom("<MAIL>");
+    	mailMessage.setText(
+    			"Thank you for registering. Please click on the below link to activate your account." + "http://localhost:9001/changePassword?token="
+    					+ token);
+
+    	sendEmail(mailMessage);
+    }
 }

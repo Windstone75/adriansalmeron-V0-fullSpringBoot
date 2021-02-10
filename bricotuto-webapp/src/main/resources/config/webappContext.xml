@@ -12,8 +12,20 @@
 
 	<!-- ===== Déclaration des services ===== -->
 	<bean id="userDetailsServiceImpl"
-		class="com.asf.bricotuto.webapp.service.user.UserDetailsServiceImpl" parent="abstractResource"/>
-	<bean id="userService"
-		class="com.asf.bricotuto.webapp.service.user.UserService" parent="abstractResource"/>
+		class="com.asf.bricotuto.webapp.service.authentification.UserDetailsServiceImpl"
+		parent="abstractResource" />
+
+	<bean id="authService"
+		class="com.asf.bricotuto.webapp.service.authentification.AuthService"
+		parent="abstractResource" />
+		
+	<bean id="userAdminService"
+		class="com.asf.bricotuto.webapp.service.admin.UserAdminService"
+		parent="abstractResource" />
+		
+	<bean id="roleAdminService"
+		class="com.asf.bricotuto.webapp.service.admin.RoleAdminService"
+		parent="abstractResource" />
+
 
 </beans>

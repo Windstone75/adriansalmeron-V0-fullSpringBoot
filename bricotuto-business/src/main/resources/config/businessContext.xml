@@ -14,11 +14,19 @@
 	<bean id="userManager"
 		class="com.asf.bricotuto.business.impl.manager.UserManagerImpl"
 		parent="abstractManager" />
+	<bean id="roleManager"
+		class="com.asf.bricotuto.business.impl.manager.RoleManagerImpl"
+		parent="abstractManager" />
+	<bean id="authManager"
+		class="com.asf.bricotuto.business.impl.manager.AuthManagerImpl"
+		parent="abstractManager" />
 
 	<!-- ===== ManagerFactory ===== -->
 	<bean id="managerFactory"
 		class="com.asf.bricotuto.business.impl.ManagerFactoryImpl">
 		<property name="userManager" ref="userManager" />
+		<property name="roleManager" ref="roleManager" />
+		<property name="authManager" ref="authManager" />
 	</bean>
 
 </beans>

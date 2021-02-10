@@ -1,7 +1,7 @@
 package com.asf.bricotuto.consumer.impl;
 
 import com.asf.bricotuto.consumer.contract.DaoFactory;
-import com.asf.bricotuto.consumer.contract.dao.ConfirmationTokenDao;
+import com.asf.bricotuto.consumer.contract.dao.UserTokenDao;
 import com.asf.bricotuto.consumer.contract.dao.RoleDao;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 
@@ -9,7 +9,7 @@ public class DaoFactoryImpl implements DaoFactory {
 
 	private UserDao userDao;
 	private RoleDao roleDao;
-	private ConfirmationTokenDao confirmationTokenDao;
+	private UserTokenDao userTokenDao;
 
 	public DaoFactoryImpl() {
 	}
@@ -34,14 +34,14 @@ public class DaoFactoryImpl implements DaoFactory {
 		this.roleDao = roleDao;
 	}
 
-	@Override
-	public ConfirmationTokenDao getConfirmationTokenDao() {
-		return confirmationTokenDao;
+	public UserTokenDao getUserTokenDao() {
+		return userTokenDao;
 	}
 
-	@Override
-	public void setConfirmationTokenDao(ConfirmationTokenDao confirmationTokenDao) {
-		this.confirmationTokenDao = confirmationTokenDao;
+	public void setUserTokenDao(UserTokenDao userTokenDao) {
+		this.userTokenDao = userTokenDao;
 	}
+
+
 
 }

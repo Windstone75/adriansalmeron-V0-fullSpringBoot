@@ -10,26 +10,29 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.Role;
-import com.asf.bricotuto.webapp.service.user.UserService;
+import com.asf.bricotuto.webapp.service.admin.RoleAdminService;
+import com.asf.bricotuto.webapp.service.admin.UserAdminService;
 
 @SpringBootTest
 @EnableTransactionManagement
 @ContextConfiguration(locations = ("classpath:/config/webappContext.xml"))
 public class UserManagerTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
-	private UserService userServiceTest;
+	private UserAdminService userAdminServiceTest;
+	@Autowired
+	private RoleAdminService roleAdminServiceTest;
 
 	@Test
 	public void testgetListUser() {
 
-		List<AppUser> l = userServiceTest.getListUser();
+		List<AppUser> l = userAdminServiceTest.getListUser();
 		assertTrue(l.size() > 0);
 	}
 
 	@Test
 	public void testgetListRole() {
 
-		List<Role> l = userServiceTest.getListRole();
+		List<Role> l = roleAdminServiceTest.getListRole();
 		assertTrue(l.size() > 0);
 	}
 

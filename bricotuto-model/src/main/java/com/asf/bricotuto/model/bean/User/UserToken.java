@@ -19,8 +19,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "ConfirmationTokens")
-public class ConfirmationToken implements Serializable {
+@Table(name = "UserTokens")
+public class UserToken implements Serializable {
 
 	private static final long serialVersionUID = -842844270644112565L;
 
@@ -33,6 +33,11 @@ public class ConfirmationToken implements Serializable {
 	@NotNull
 	@NotEmpty
 	private String token;
+	
+	@NotNull
+	@NotEmpty
+	private String type;
+
 
 	@OneToOne(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
@@ -40,13 +45,14 @@ public class ConfirmationToken implements Serializable {
 	
 	private Date expiryDt;
 
-	public ConfirmationToken() {
+	public UserToken() {
 		this.expiryDt = calculateExpiryDate(EXPIRATION);
 		this.token = UUID.randomUUID().toString();
 	}
 
-	public ConfirmationToken(AppUser user) {
+	public UserToken(AppUser user,String type) {
 		this.user = user;
+		this.type=type;
 		this.expiryDt = calculateExpiryDate(EXPIRATION);
 		this.token = UUID.randomUUID().toString();
 	}
@@ -82,9 +88,17 @@ public class ConfirmationToken implements Serializable {
 	public void setExpiryDt(Date expiryDate) {
 		this.expiryDt = expiryDate;
 	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		String result = "ConfirmationToken : \n -->id :" + this.tokenId + "\n -->Token : " + this.token
+		String result = "UserToken : \n -->id :" + this.tokenId + "\n -->Type : " + this.type + "\n -->Token : " + this.token
 				+ "\n -->Expiry Date : " + this.expiryDt+"\n\n"+this.user;		 
 		return result;
 	}

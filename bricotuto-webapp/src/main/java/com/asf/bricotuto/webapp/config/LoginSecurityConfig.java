@@ -9,13 +9,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.asf.bricotuto.webapp.service.user.UserDetailsServiceImpl;
+import com.asf.bricotuto.webapp.service.authentification.UserDetailFailureHandler;
+import com.asf.bricotuto.webapp.service.authentification.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	 UserDetailsServiceImpl userDetailsService;
+	  @Autowired
+	 private UserDetailFailureHandler failureHandler;
 	 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -37,10 +40,11 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/member/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
-				.formLogin().loginPage("/login")
-				.defaultSuccessUrl("/home")
-				.failureUrl("/login?error")
-				.usernameParameter("email").passwordParameter("password")				
+				.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/home")				
+				.usernameParameter("email").passwordParameter("password")
+				.failureHandler(failureHandler)
 			.and()
 				.logout().logoutSuccessUrl("/login?logout")
 			.and()

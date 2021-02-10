@@ -28,40 +28,10 @@
 
 		<div class="login-form">
 
-			<form:form name='signup' modelAttribute="user" action="signup"
+			<form:form name='changePassword' modelAttribute="user" action="changePassword"
 				method="post">
-				<h2 class="text-center">Sign up</h2>
-				<div class="form-group row">
-					<div class="col-sm-4">
-						<form:label path="firstname">firstname</form:label>
-					</div>
-					<div class="col-sm-8">
-						<form:input path="firstname" class="form-control"
-							placeholder="First Name" />
-						<form:errors path="firstname" cssClass="error" />
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<div class="col-sm-4">
-						<form:label path="lastname">lastname</form:label>
-					</div>
-					<div class="col-sm-8">
-						<form:input path="lastname" class="form-control"
-							placeholder="Last Name" />
-						<form:errors path="lastname" cssClass="error" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-4">
-						<form:label path="email">email</form:label>
-					</div>
-					<div class="col-sm-8">
-						<form:input path="email" class="form-control"
-							placeholder="exemple@mail.com" />
-						<form:errors path="email" cssClass="error" />
-					</div>
-				</div>
+				<h2 class="text-center">change passsword</h2>
+				
 				<div class="form-group row">
 					<div class="col-sm-4">
 						<form:label path="password">password</form:label>
@@ -85,7 +55,7 @@
 
 				<div class="form-group">
 					<button type="submit" value="" class="btn btn-primary btn-block">
-						<spring:message code="login.submit" />
+						change Password
 					</button>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
