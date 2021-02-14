@@ -1,12 +1,12 @@
-package com.asf.bricotuto.business.impl;
+package com.asf.bricotuto.business.service;
 
 import com.asf.bricotuto.consumer.contract.DaoFactory;
 
-public abstract class AbstractManager {
+public abstract class AbstractService {
 
-    private static DaoFactory daoFactory;
+    public static DaoFactory daoFactory;
 
-    protected static DaoFactory getDaoFactory() {
+    public DaoFactory getDaoFactory() {
         return daoFactory;
     }
 

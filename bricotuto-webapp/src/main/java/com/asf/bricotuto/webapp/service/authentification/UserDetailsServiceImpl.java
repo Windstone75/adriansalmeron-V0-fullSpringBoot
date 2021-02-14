@@ -22,13 +22,13 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		AppUser vUser = getManagerFactory().getUserManager().findByEmail(email);
+		AppUser vUser = getManagerFactory().getUserManager().getUserByEmail(email);
 
 		if (vUser == null) {
 			throw new UsernameNotFoundException("No user found with username: " + email);		
 		}
 
-		List<String> roleNames = getManagerFactory().getRoleManager().getRoleNamesByUserId(vUser.getUserId());
+		List<String> roleNames = getManagerFactory().getUserManager().getRolesOfUserById(vUser.getUserId());
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		if (roleNames != null) {
 			for (String role : roleNames) {

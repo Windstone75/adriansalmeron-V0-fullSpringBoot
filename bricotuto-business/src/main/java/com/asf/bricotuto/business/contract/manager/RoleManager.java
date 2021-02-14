@@ -2,13 +2,17 @@ package com.asf.bricotuto.business.contract.manager;
 
 import java.util.List;
 
-import com.asf.bricotuto.model.bean.User.AppUser;
-import com.asf.bricotuto.model.bean.User.UserToken;
 import com.asf.bricotuto.model.bean.User.Role;
 
 public interface RoleManager {
 
  	List<Role> getListRole();
+ 	
+ 	Role getRoleById(Long id);
+ 	
+ 	void saveRole(Role role);
 
-	List<String> getRoleNamesByUserId(Long userId);	
+	void updateRole(Role role);
+
+	void deleteRole(Role role);
 }

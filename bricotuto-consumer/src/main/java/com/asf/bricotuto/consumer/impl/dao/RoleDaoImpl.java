@@ -8,21 +8,21 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.asf.bricotuto.consumer.contract.dao.RoleDao;
 import com.asf.bricotuto.model.bean.User.Role;
 
+@Repository
+@Transactional
 public class RoleDaoImpl extends AbstractDaoImpl<Role> implements RoleDao {
 
 	public RoleDaoImpl() {
 		setClazz(Role.class);
 	}
 
-	@Override
-	public List<Role> getListRole() {
-		return findAll();
-	}
-	
+		
 	@Override
 	public Role findByName(String name) {
 		Session session = getCurrentSession();
@@ -40,4 +40,6 @@ public class RoleDaoImpl extends AbstractDaoImpl<Role> implements RoleDao {
 		}
 		return role;
 	}
+
+	
 }

@@ -17,7 +17,7 @@ public class UserTokenDaoImpl extends AbstractDaoImpl<UserToken> implements User
 	}
 
 	@Override
-	public UserToken getConfirmationToken(String VerificationToken) {
+	public UserToken getUserTokenByToken(String token) {
 		
 		Session session = getCurrentSession();
 		UserToken coToken = null;
@@ -25,7 +25,7 @@ public class UserTokenDaoImpl extends AbstractDaoImpl<UserToken> implements User
 		CriteriaBuilder cb = session.getCriteriaBuilder();
 		CriteriaQuery<UserToken> cr = cb.createQuery(UserToken.class);
 		Root<UserToken> root = cr.from(UserToken.class);
-		cr.select(root).where(cb.like(root.get("token"), VerificationToken));
+		cr.select(root).where(cb.like(root.get("token"), token));
 		// execute query
 		Query<UserToken> query = session.createQuery(cr);
 		List<UserToken> results = query.getResultList();

@@ -4,12 +4,12 @@ import com.asf.bricotuto.model.bean.User.UserToken;
 
 public interface UserTokenDao {
 
-	void save(UserToken confirmationToken);
+	void save(UserToken userToken);
 
-	void delete(UserToken confirmationToken);
+	void delete(UserToken userToken);
 
 	void deleteById(long id);
 
-	UserToken getConfirmationToken(String token);
+	UserToken getUserTokenByToken(String token);
 
 }

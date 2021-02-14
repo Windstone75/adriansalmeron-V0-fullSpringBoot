@@ -24,7 +24,7 @@ public class AuthService extends AbstractResource {
 	};
 
 	public AppUser validateRegistrationToken(String token) throws Exception {
-		return getManagerFactory().getAuthManager().validateRegistrationToken(token);
+		return getManagerFactory().getAuthManager().validateNewUserToken(token);
 
 	};
 
@@ -34,15 +34,15 @@ public class AuthService extends AbstractResource {
 	}
 
 	private boolean emailExist(String email) {
-		return getManagerFactory().getUserManager().findByEmail(email) != null;
+		return getManagerFactory().getUserManager().getUserByEmail(email) != null;
 	}
 
 	public UserToken resetPassword(String email) throws Exception {
-		AppUser user = getManagerFactory().getUserManager().findByEmail(email);
+		AppUser user = getManagerFactory().getUserManager().getUserByEmail(email);
 		if (user == null) {
 			throw new Exception("An account for that email don't exists.");
 		}
-		return getManagerFactory().getAuthManager().resetPassword(user);
+		return getManagerFactory().getAuthManager().createResetPasswordToken(user);
 	}
 
 	public AppUser validateResetPasswordToken(String token) throws Exception {

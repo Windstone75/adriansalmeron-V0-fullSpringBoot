@@ -5,21 +5,23 @@
 	<!-- ==== Import Context===== -->
 	<import resource="consumerContext.xml" />
 
-	<!-- ==== AbstractManager===== -->
-	<bean id="abstractManager" abstract="true">
+	<!-- ==== AbstractService===== -->
+	<bean id="abstractService" abstract="true">
 		<property name="daoFactory" ref="daoFactory"></property>
 	</bean>
+	
+	<!-- ===== Déclaration des Services  ===== -->
+	<bean id="roleService"
+		class="com.asf.bricotuto.business.service.RoleService"
+		parent="abstractService" />
 
 	<!-- ===== Déclaration des Managers ===== -->
 	<bean id="userManager"
-		class="com.asf.bricotuto.business.impl.manager.UserManagerImpl"
-		parent="abstractManager" />
+		class="com.asf.bricotuto.business.impl.manager.UserManagerImpl"/>
 	<bean id="roleManager"
-		class="com.asf.bricotuto.business.impl.manager.RoleManagerImpl"
-		parent="abstractManager" />
+		class="com.asf.bricotuto.business.impl.manager.RoleManagerImpl"/>
 	<bean id="authManager"
-		class="com.asf.bricotuto.business.impl.manager.AuthManagerImpl"
-		parent="abstractManager" />
+		class="com.asf.bricotuto.business.impl.manager.AuthManagerImpl"/>
 
 	<!-- ===== ManagerFactory ===== -->
 	<bean id="managerFactory"
@@ -28,5 +30,7 @@
 		<property name="roleManager" ref="roleManager" />
 		<property name="authManager" ref="authManager" />
 	</bean>
+	
+	
 
 </beans>

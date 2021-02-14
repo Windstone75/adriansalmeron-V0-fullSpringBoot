@@ -91,6 +91,7 @@
 				<artifactId>javax.annotation-api</artifactId>
 				<version>1.2</version>
 			</dependency>
+
 			<!-- Annotation JSR-330 -->
 			<dependency>
 				<groupId>javax.inject</groupId>
@@ -98,20 +99,48 @@
 				<version>1</version>
 			</dependency>
 
-			<!-- Test -->
+			<!-- Hibernate : Dom4j -->
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.13</version>
-				<scope>test</scope>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
 			</dependency>
-
+			<!-- Hibernate : collection -->
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.1</version>
+			</dependency>
 
 			<!-- lombok optimisation classe -->
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<optional>true</optional>
+			</dependency>
+
+			<!-- Test : Junit -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>5.6.2</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Test : AssertJ -->
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>3.17.2</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Test : Mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>3.4.0</version>
+				<scope>test</scope>
 			</dependency>
 
 
@@ -174,7 +203,7 @@
 						</excludes>
 					</configuration>
 				</plugin>
-				
+
 				<!-- Compilation des sources Java -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -201,7 +230,7 @@
 					<version>3.0.0</version>
 				</plugin>
 
-                <!-- Deploiement Tomcat WAR -->
+				<!-- Deploiement Tomcat WAR -->
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>

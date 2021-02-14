@@ -1,4 +1,4 @@
-package com.asf.bricotuto.webapp.controlleur.admin;
+package com.asf.bricotuto.webapp.controlleur.admin.database;
 
 
 import java.util.List;

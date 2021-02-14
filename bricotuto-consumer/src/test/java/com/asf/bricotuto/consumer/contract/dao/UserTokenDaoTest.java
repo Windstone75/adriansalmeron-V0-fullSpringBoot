@@ -1,8 +1,9 @@
 package com.asf.bricotuto.consumer.contract.dao;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,44 +13,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.asf.bricotuto.consumer.contract.dao.UserTokenDao;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.UserToken;
 
 @SpringBootTest
-@EnableTransactionManagement
 @ContextConfiguration(locations = ("classpath:/config/consumerContext.xml"))
 @DisplayName("Test UserToken Dao")
 @TestMethodOrder(OrderAnnotation.class)
 public class UserTokenDaoTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
-	private UserDao userDaoTest;
-	@Autowired
 	private UserTokenDao tokenDaoTest;
+	@Autowired
+	private UserDao userDaoTest;
+	
+	public static AppUser user;
+	public static UserToken userTokenTest;
+
+	@BeforeEach
+	void setup() {
+		user = userDaoTest.findByEmail("usertest@test.com");
+	}
 
 	@Test
-	@DisplayName("Create,get and delete UserToken")
+	@DisplayName("Create and get UserToken by token")
 	@Order(1)
 	public void testCreateAndFindUserToken() {
-		System.out.println("UserTokenDaoTest - 1 : Create,find and delete UserToken");
-		UserToken coTokenTest;
-		AppUser userTmp;
+		System.out.println("UserTokenDaoTest - 1 : Create and get UserToken by token");		
 		try {
-			userTmp = userDaoTest.findByEmail("usertest@test.com");
-			UserToken coToken = new UserToken(userTmp,"TokenTest");
+			UserToken coToken = new UserToken(user, "TokenTest");
 			// save
 			tokenDaoTest.save(coToken);
-			// get confirmationToken by token
-			coTokenTest = tokenDaoTest.getConfirmationToken(coToken.getToken());
-			assertEquals(coToken.getToken(), coTokenTest.getToken());
-			assertEquals(coToken.getType(), "TokenTest");
-			// delete
-			tokenDaoTest.delete(coTokenTest);
-			assertEquals(tokenDaoTest.getConfirmationToken(coToken.getToken()), null);
+			// Assert save and getUserTokenByToken
+			userTokenTest = tokenDaoTest.getUserTokenByToken(coToken.getToken());
+			assertEquals(coToken.getToken(), userTokenTest.getToken());
+			assertEquals(coToken.getType(), "TokenTest");			
 		} catch (Exception e) {
 			System.out.println("Error UserTokenDaoTest - 1 : " + e);
+			fail(e);
+		}
+	}
+	
+	@Test
+	@DisplayName("2 - Delete UserToken")
+	@Order(2)
+	public void testfindAndDeleteUser() {
+		System.out.println("UserTokenDaoTest - 2 : Delete UserToken");
+		try {
+			tokenDaoTest.delete(userTokenTest);
+			// Assert delete UserToken
+			assertEquals(tokenDaoTest.getUserTokenByToken(userTokenTest.getToken()), null);
+		} catch (Exception e) {
+			System.out.println("Error UserTokenDaoTest - 2 : " + e);
 			fail(e);
 		}
 

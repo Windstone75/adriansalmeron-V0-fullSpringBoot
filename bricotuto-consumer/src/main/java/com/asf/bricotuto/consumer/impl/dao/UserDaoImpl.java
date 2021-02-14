@@ -22,14 +22,6 @@ public class UserDaoImpl extends AbstractDaoImpl<AppUser> implements UserDao {
 	}
 
 	@Override
-	public AppUser findById(Long pId) {
-		AppUser user = findOne(pId);
-		//init validate fields MatchingPassword (not in database
-		user.setMatchingPassword(user.getPassword());
-		return user;
-	}
-
-	@Override
 	public AppUser findByEmail(String email) {
 		Session session = getCurrentSession();
 		AppUser user = null;
@@ -50,12 +42,13 @@ public class UserDaoImpl extends AbstractDaoImpl<AppUser> implements UserDao {
 	}
 
 	@Override
-	public List<String> getListRoleByUserId(Long userId) {
+	public List<String> getRoleOfUserById(Long userId) {
 		List<String> listerole = new ArrayList<String>();
-		AppUser user = findOne(userId);
+		AppUser user = findById(userId);
 		for (Role r : user.getRoles()) {
 			listerole.add(r.getName());
 		}
 		return listerole;
 	}
+
 }

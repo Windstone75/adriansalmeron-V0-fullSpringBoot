@@ -24,7 +24,7 @@ public class UserDetailFailureHandler extends SimpleUrlAuthenticationFailureHand
 			AuthenticationException exception) throws IOException, ServletException {
 		String errorMessage;
 		String email = request.getParameter("email");
-		AppUser user=mFactory.getUserManager().findByEmail(email);
+		AppUser user=mFactory.getUserManager().getUserByEmail(email);
 		
 		
 		 if (user!=null && !user.isEnabled()){

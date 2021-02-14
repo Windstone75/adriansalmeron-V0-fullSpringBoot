@@ -19,7 +19,7 @@ public abstract class AbstractDaoImpl<T extends Serializable> {
 		clazz = clazzToSet;
 	}
 
-	public T findOne(long id) {
+	public T findById(long id) {
 		return (T) getCurrentSession().get(clazz, id);
 	}
 
@@ -41,7 +41,7 @@ public abstract class AbstractDaoImpl<T extends Serializable> {
 	}
 
 	public void deleteById(long id) {
-		final T entity = findOne(id);
+		final T entity = findById(id);
 		delete(entity);
 	}
 
