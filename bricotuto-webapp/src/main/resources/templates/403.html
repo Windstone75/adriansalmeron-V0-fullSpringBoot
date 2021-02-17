@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #403-static-resources},
+                                                ~{:: #403-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="403-static-resources">
+</th:block>
+
+<title>Access Denied</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="403-mainContent" class="container">
+		<div style="text-align: center">
+			<img th:src="@{/images/accessdenied.jpg}" width="auto" height="600"
+				alt="Info Logo" />
+		</div>
+	</div>
+
+</body>
+</html>

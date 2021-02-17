@@ -27,8 +27,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-		
+	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {		
 		  // Setting Service to find User in the database.
 		authenticationMgr.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());	
 	}
@@ -41,12 +40,12 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
 				.formLogin()
-				.loginPage("/login")
+				.loginPage("/signin")
 				.defaultSuccessUrl("/home")				
 				.usernameParameter("email").passwordParameter("password")
 				.failureHandler(failureHandler)
 			.and()
-				.logout().logoutSuccessUrl("/login?logout")
+				.logout().logoutSuccessUrl("/home")
 			.and()
 				.exceptionHandling().accessDeniedPage("/403"); 
 	}

@@ -17,7 +17,7 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-	
+	System.out.println("loaduserbyname");
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #homeMember-static-resources},
+                                                ~{:: #homeMember-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="homeMember-static-resources">
+</th:block>
+
+<title>Member</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="homeMember-mainContent" class="container">
+		<div style="text-align: center">
+			<img th:src="@{/images/underconstruction.png}" alt="Info Logo" />
+		</div>
+	</div>
+
+</body>
+</html>

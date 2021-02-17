@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/admin-layout :: layout(
+												~{::title},
+                                                ~{:: #homeAdmin-static-resources},
+                                                ~{:: #homeAdmin-mainContent}
+                                               )}">
+<head>
+
+<!-- Block javaScript, CSS source files -->
+<th:block id="homeAdmin-static-resources">
+</th:block>
+
+<title>Admin - Dashboard</title>
+
+</head>
+<body>
+
+	<!-- Main content body  -->
+	<div id="homeAdmin-mainContent" class="container">
+		<!-- Main content body  -->
+			<h1 class="mt-4">Dashboard</h1>
+			<div style="text-align: center">
+					<img th:src="@{/images/underconstruction.png}" alt="Info Logo" />
+			</div>
+	</div>
+
+</body>
+
+</html>

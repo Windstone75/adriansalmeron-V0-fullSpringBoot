@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #signin-static-resources},
+                                                ~{:: #signin-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="signin-static-resources">
+</th:block>
+
+<title>Sign In</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="signin-mainContent" class="container">
+		<div class="login-form">
+
+			<form name='login' th:action="@{/signin}" method='post'>
+			
+				<h2 class="text-center">
+					<th:label th:text="#{menu.login}">Sign In</th:label>
+				</h2>
+
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formField(field='email',typeInput='text' ,label=#{login.email},placeholder='exemple@email.com')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formField(field='password',typeInput='password' ,label=#{login.password},placeholder='Password')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formSubmitButton (label=#{login.submit}, value='submit', style='btn btn-primary btn-block')">
+				</div>
+
+
+				<div class="clearfix">
+					<a th:href="@{/signup}" class="float-left text-center">Create an
+						Account</a> 
+					<a th:href="@{/forgotPassword}" class="float-right text-center">Forgot
+						Password?</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

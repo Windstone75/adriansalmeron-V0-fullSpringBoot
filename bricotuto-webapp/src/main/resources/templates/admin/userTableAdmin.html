@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/admin-layout :: layout(
+												~{::title},
+                                                ~{:: #roleTableAdmin-static-resources},
+                                                ~{:: #roleTableAdmin-mainContent}
+                                               )}">
+<head>
+
+<!-- Block javaScript, CSS source files -->
+<th:block id="roleTableAdmin-static-resources">
+	<script src="../js/table.js"></script>
+</th:block>
+
+<title>Table User</title>
+
+</head>
+<body>
+
+	<!-- Main content body  -->
+	<div id="roleTableAdmin-mainContent" class="container">
+		<!-- Main content body  -->
+		<div class="breadcrumb ">
+			<h2>Table User</h2>
+		</div>
+
+		<!-- Zone table -->
+		<div style="overflow-x: auto;">
+			<p>
+				<input id="myInput" type="text" placeholder="Search..">
+			</p>
+
+			<table id="myTable">
+				<thead>
+					<tr>
+						<th data-type="number">userId <img
+							th:src="@{/images/iconeSort.png}" width="20" height="20" align="right" />
+						</th>
+						<th data-type="string">firstname<img
+							th:src="@{/images/iconeSort.png}"width="20" height="20" align="right" /></th>
+						<th data-type="string">lastname<img
+							th:src="@{/images/iconeSort.png}"width="20" height="20" align="right" /></th>
+						<th data-type="string">email<img th:src="@{/images/iconeSort.png}"
+							width="20" height="20" align="right" /></th>
+						<th data-type="boolean">enabled<img
+							th:src="@{/images/iconeSort.png}" width="20" height="20" align="right" /></th>
+						<th data-type="string">inscriptionDt<img
+							th:src="@{/images/iconeSort.png}" width="20" height="20" align="right" /></th>
+						<th data-type="string">Action</th>
+					</tr>
+				</thead>
+				<tbody th:each="user : ${users}">
+					<tr>
+						<td th:text="${user.userId}">userId</td>
+						<td th:text="${user.firstname}">firstname</td>
+						<td th:text="${user.lastname}">lastname</td>
+						<td th:text="${user.email}">email</td>
+						<td th:text="${user.enabled}">enable</td>
+						<td th:text="${user.inscriptionDt}">date inscription</td>
+						<td>update / delete</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+
+</body>
+
+</html>

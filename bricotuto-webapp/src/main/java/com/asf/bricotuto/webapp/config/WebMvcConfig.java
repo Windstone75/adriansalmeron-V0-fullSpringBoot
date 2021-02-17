@@ -11,8 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import com.asf.bricotuto.webapp.interceptor.UrlLocaleInterceptor;
 import com.asf.bricotuto.webapp.interceptor.UrlLocaleResolver;
@@ -26,24 +24,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	// *******************************************
 	// ******** add Resource Handlers **********
 	// *******************************************
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**","{locale:en|fr|es}/images/**").addResourceLocations("/resources/images/");
-		registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
-		registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");	
-	}
-
-	// *******************************************
-	// ******** View Resolver **********
-	// *******************************************
-	@Bean
-	public InternalResourceViewResolver jspPageViewResolver() {
-		InternalResourceViewResolver jspViewResolver = new InternalResourceViewResolver();
-		jspViewResolver.setViewClass(JstlView.class);
-		jspViewResolver.setPrefix("/WEB-INF/jsp/");
-		jspViewResolver.setSuffix(".jsp");
-		return jspViewResolver;
-	}
+	  @Override
+	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        registry.addResourceHandler(
+	                "/images/**",
+	                "/css/**",
+	                "/js/**")
+	                .addResourceLocations(
+	                        "classpath:/static/images/",
+	                        "classpath:/static/css/",
+	                        "classpath:/static/js/");
+			}
 
 	// *******************************************
 	// ******** Internalization (i18n ) **********

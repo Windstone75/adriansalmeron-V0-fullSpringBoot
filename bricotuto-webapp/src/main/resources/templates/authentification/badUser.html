@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #badUser-static-resources},
+                                                ~{:: #badUser-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="badUser-static-resources">
+</th:block>
+
+<title>Bad user</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="badUser-mainContent" class="container">
+		<h1>${message}</h1>
+		<a class="nav-link" href="login">Sign up</a>
+	</div>
+
+</body>
+</html>

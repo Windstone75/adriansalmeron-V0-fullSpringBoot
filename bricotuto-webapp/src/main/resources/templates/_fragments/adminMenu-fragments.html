@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8" />
+<title>Admin Menu Fragments</title>
+</head>
+<body>
+	<!-- Menu -->
+	<div th:fragment="adminMenu">
+	
+		<div class="sidebar">
+			<div class="sidebar-menu-chapter">General</div>
+			<a class="sidebar-menu-link" th:href="@{/admin}"> <span
+				class="menu-icon"> <i class="fas fa-tachometer-alt"></i>
+			</span> Dashboard
+			</a>
+
+			<div class="sidebar-menu-chapter">database</div>
+			<button class="accordion sidebar-menu-link">
+				<span class="menu-icon"> <i class="fas fa-table"></i>
+				</span> Table
+			</button>
+			<div class="acordion-panel">
+				<a class="sidebar-submenu-link" th:href="@{/admin/userTableAdmin}" >User</a>
+				<a class="sidebar-submenu-link" th:href="@{/admin/roleTableAdmin}">Role</a>
+			</div>
+		</div>
+		<!-- Script accordion event-->
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+			for (i = 0; i < acc.length; i++) {
+				acc[i].addEventListener("click", function() {
+					this.classList.toggle("accordion-active");
+					var panel = this.nextElementSibling;
+					if (panel.style.display === "block") {
+						panel.style.display = "none";
+					} else {
+						panel.style.display = "block";
+					}
+				});
+			}
+		</script>
+	</div>
+</body>
+</html>

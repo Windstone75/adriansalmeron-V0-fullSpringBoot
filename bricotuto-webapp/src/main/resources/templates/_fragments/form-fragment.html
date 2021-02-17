@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+</head>
+<body>
+	<!-- 
+	formField (field, label, placeholder)"
+ 	-->
+	<div class="form-group"
+		th:fragment="formField (field, typeInput, label, placeholder)">
+		<!-- Label field -->
+		<label th:text="${label}">FieldLabel</label>
+		<!-- input field -->
+		<input th:type="${typeInput}" th:name='${field}' class="form-control"
+			th:placeholder="${placeholder}">
+	</div>
+
+	<!-- 
+	formRow(field, label, placeholder)"
+ 	-->
+	<div class="form-group row"
+		th:fragment="formRow (field, typeInput, label, placeholder)">
+		<div class="col-sm-4">
+			<!-- Label field -->
+			<label th:text="${label}" th:path="firstname">RowLabel</label>
+		</div>
+		<div class="col-sm-8">
+			<!-- input field -->
+			<input th:type="${typeInput}" th:name='${field}' class="form-control"
+				th:placeholder="${placeholder}">
+				
+			<!-- <form:input path="firstname" class="form-control" placeholder="First Name" />
+				<form:errors path="firstname" cssClass="error" /> -->
+		</div>
+	</div>
+
+	<!-- 
+	formSubmitButton (label, value, style)"
+ 	-->
+	<div class="form-group"
+		th:fragment="formSubmitButton (label, value, style)">
+		<button type="submit" th:text="${label}" th:value="${value}"
+			th:class="${style}">SubmitButton</button>
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</div>
+
+</body>
+</html>

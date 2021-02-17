@@ -30,23 +30,22 @@ public class AuthController {
 	private EmailService emailService;
 
 	/**
-	 * Show login Page
+	 * Show SignIn Page
 	 * 
 	 * @param error
 	 * @param logout
 	 * @return
 	 */
-	@RequestMapping(value = { "/{locale:en|fr|es}/login", "/login" }, method = RequestMethod.GET)
-	public ModelAndView showloginPage(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, HttpSession session) {
+	@RequestMapping(value = { "/{locale:en|fr|es}/signin", "/signin" }, method = RequestMethod.GET)
+	public ModelAndView showSignInPage(@RequestParam(value = "error", required = false) String error){		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView model = new ModelAndView();
+		model.addObject("user", auth.getDetails());		
 
-		model.addObject("user", auth.getDetails());
 		if (error != null) {
 			model.addObject("error", error);
 		}
-		model.setViewName("login");
+		model.setViewName("/authentification/signin");
 		return model;
 	}
 
@@ -61,7 +60,7 @@ public class AuthController {
 	public String showSignUpUser(Model model) {
 		AppUser user = new AppUser();
 		model.addAttribute("user", user);
-		return "signup";
+		return "/authentification/signup";
 	}
 
 	/**
@@ -80,18 +79,18 @@ public class AuthController {
 			// Verification password Match
 			if (!user.getPassword().equals(user.getMatchingPassword())) {
 				model.addAttribute("errorPasswordMatches", "Password don't match");
-				return "/signup";
+				return "/authentification/signup";
 			}
 			// Save User
 			UserToken coToken = authService.registerNewUserAccount(user);
 			// send email confirmation
 			emailService.sendConfirmationTokenMail(user.getEmail(), coToken.getToken());
 			model.addAttribute("user", user);
-			return "successRegister";
+			return "/authentification/successRegister";
 
 		} catch (UserAlreadyExistException uaeEx) {
 			model.addAttribute("message", uaeEx.getMessage());
-			return "signup";
+			return "/authentification/signup";
 		}
 
 	}
@@ -110,7 +109,7 @@ public class AuthController {
 		try {
 			System.out.println("token recupere :" + token);
 			authService.validateRegistrationToken(token);
-			return "redirect:/login";
+			return "redirect:/signin";
 
 		} catch (Exception e) {
 			String messageValue = e.getMessage();
@@ -130,7 +129,7 @@ public class AuthController {
 	public String errorRegistration(Model model, @RequestParam("message") String message) {
 		System.out.println(message);
 		model.addAttribute("message", message);
-		return "badUser";
+		return "/authentification/badUser";
 	}
 
 	/**
@@ -143,7 +142,7 @@ public class AuthController {
 	public String showResetPassword(Model model) {
 		AppUser user = new AppUser();
 		model.addAttribute("user", user);
-		return "forgotPassword";
+		return "/authentification/forgotPassword";
 	}
 
 	/**
@@ -165,13 +164,13 @@ public class AuthController {
 			UserToken coToken = authService.resetPassword(userEmail);
 			// send email reset
 			emailService.sendResetPasswordMail(coToken.getUser().getEmail(), coToken.getToken());
-			return "successRegister";
+			return "/authentification/successRegister";
 
 		} catch (Exception e) {
 			AppUser user = new AppUser();
 			model.addAttribute("user", user);
 			model.addAttribute("error", e.getMessage());
-			return "forgotPassword";
+			return "/authentification/forgotPassword";
 		}
 	}
 
@@ -202,11 +201,11 @@ public class AuthController {
 		try {
 			user = authService.validateResetPasswordToken(token);
 			model.addAttribute("user", user);
-			return "changePassword";
+			return "/authentification/changePassword";
 		} catch (Exception e) {
 			model.addAttribute("user", new AppUser());
 			System.out.println("errorrrrrshangepassword");
-			return "changePassword";
+			return "/authentification/changePassword";
 		}
 	}
 
@@ -229,17 +228,17 @@ public class AuthController {
 			if (!user.getPassword().equals(user.getMatchingPassword())) {
 				System.out.println("token password don t match" + token);
 				model.addAttribute("errorPasswordMatches", "Password don't match");
-				return "changePassword";
+				return "/authentification/changePassword";
 			}
 			// update User (user,token)
 			System.out.println("password valider ,token:" + token);
 			authService.changeUserPasswordWithToken(user.getPassword(), token);
 			// send email confirmation
-			return "home";
+			return "redirect:/signin";
 
 		} catch (Exception uaeEx) {
 			model.addAttribute("message", uaeEx.getMessage());
-			return "changePassword";
+			return "/authentification/changePassword";
 		}
 
 	}
