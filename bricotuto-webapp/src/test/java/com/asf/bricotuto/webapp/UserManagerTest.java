@@ -47,7 +47,7 @@ public class UserManagerTest extends AbstractJUnit4SpringContextTests {
 		 * 
 		 * user.setInscriptionDt(new Date()); try {
 		 * userServiceTest.registerNewUserAccount(user); } catch
-		 * (UserAlreadyExistException e) { // TODO Auto-generated catch block
+		 * (FunctionalException e) { // TODO Auto-generated catch block
 		 * e.printStackTrace(); }
 		 */
 	}

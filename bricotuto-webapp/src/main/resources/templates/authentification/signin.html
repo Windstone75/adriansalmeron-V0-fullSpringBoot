@@ -19,10 +19,10 @@
 		<div class="login-form">
 
 			<form name='login' th:action="@{/signin}" method='post'>
-			
+
 				<h2 class="text-center">
 					<th:label th:text="#{menu.login}">Sign In</th:label>
-				</h2>
+				</h2>				
 
 				<div
 					th:replace="_fragments/form-fragment.html :: 
@@ -32,6 +32,12 @@
 					th:replace="_fragments/form-fragment.html :: 
 					formField(field='password',typeInput='password' ,label=#{login.password},placeholder='Password')">
 				</div>
+				
+				<div class="form-group  text-center" th:if="${error != null}">
+					<th:span class="error" th:text="${error}">Email/Password invalid or user disable</th:span>
+					<br>
+				</div>
+				
 				<div
 					th:replace="_fragments/form-fragment.html :: 
 					formSubmitButton (label=#{login.submit}, value='submit', style='btn btn-primary btn-block')">
@@ -39,10 +45,9 @@
 
 
 				<div class="clearfix">
-					<a th:href="@{/signup}" class="float-left text-center">Create an
-						Account</a> 
-					<a th:href="@{/forgotPassword}" class="float-right text-center">Forgot
-						Password?</a>
+					<a th:href="@{/signup}" class="float-left text-center">Create
+						an Account</a> <a th:href="@{/forgotPassword}"
+						class="float-right text-center">Forgot Password?</a>
 				</div>
 			</form>
 		</div>

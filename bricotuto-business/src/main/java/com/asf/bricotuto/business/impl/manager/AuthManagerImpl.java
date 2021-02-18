@@ -7,6 +7,8 @@ import com.asf.bricotuto.business.service.UserService;
 import com.asf.bricotuto.business.service.UserTokenService;
 import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.UserToken;
+import com.asf.bricotuto.model.exception.FunctionalException;
+import com.asf.bricotuto.model.exception.UserTokenException;
 import com.asf.bricotuto.model.bean.User.Role;
 
 public class AuthManagerImpl implements AuthManager {
@@ -28,18 +30,22 @@ public class AuthManagerImpl implements AuthManager {
 	}
 
 	@Override
-	public UserToken saveNewUser(AppUser user) {
+	public UserToken saveNewUser(AppUser user) throws FunctionalException {
+		AppUser usertmp = userService.findByEmail(user.getEmail());
+		if(usertmp!=null) {
+			throw new FunctionalException("Email already exist");
+		}
 		// Save user
 		userService.save(user);
 		// Create and save Confirmation Token
-		AppUser usertmp = userService.findByEmail(user.getEmail());
+		usertmp = userService.findByEmail(user.getEmail());
 		UserToken cToken = new UserToken(usertmp, "NewUser");
 		userTokenService.save(cToken);
 		return cToken;
 	}
 
 	@Override
-	public AppUser validateNewUserToken(String token) throws Exception {
+	public AppUser validateNewUserToken(String token) throws UserTokenException {
 		UserToken NewUserToken;
 		Role roleUser = null;
 		AppUser user;		
@@ -65,18 +71,18 @@ public class AuthManagerImpl implements AuthManager {
 	}
 
 	@Override
-	public AppUser validateResetPasswordToken(String token) throws Exception {
+	public AppUser validateResetPasswordToken(String token) throws UserTokenException {
 		UserToken confirmationToken;
 		AppUser user;
 
 		// Get and verification Token
 		confirmationToken = userTokenService.getUserTokenByToken(token);
 		if (confirmationToken == null) {
-			throw new Exception("Invalid Token");
+			throw new UserTokenException("Invalid Token");
 		}
 		Calendar cal = Calendar.getInstance();
 		if ((confirmationToken.getExpiryDt().getTime() - cal.getTime().getTime()) <= 0) {
-			throw new Exception("Token Expired");
+			throw new UserTokenException("Token Expired");
 		}
 		user = confirmationToken.getUser();
 		return user;
@@ -84,7 +90,7 @@ public class AuthManagerImpl implements AuthManager {
 	}
 
 	@Override
-	public void changeUserPasswordWithToken(String password, String token) throws Exception {
+	public void changeUserPasswordWithToken(String password, String token) throws UserTokenException {
 		// Get User and verification Token
 		UserToken resetPasswordToken=verificationToken(token);
 		AppUser user = resetPasswordToken.getUser();
@@ -97,20 +103,26 @@ public class AuthManagerImpl implements AuthManager {
 
 	}
 	
-	private UserToken verificationToken(String token) throws Exception{
+	private UserToken verificationToken(String token) throws UserTokenException{
 		// Get and verification Token
 			UserToken	userToken = userTokenService.getUserTokenByToken(token);
 				if (userToken == null) {
-					throw new Exception("Invalid Token");
+					throw new UserTokenException("Invalid Token");
 				}
 				Calendar cal = Calendar.getInstance();
 				if ((userToken.getExpiryDt().getTime() - cal.getTime().getTime()) <= 0) {
-					throw new Exception("Token Expired");
+					throw new UserTokenException("Token Expired");
 				}
 				
 				return userToken;
 				
 		
+	}
+
+	
+	@Override
+	public AppUser getUserToSignIn(String email) {
+		return userService.findByEmail(email);
 	}
 
 }

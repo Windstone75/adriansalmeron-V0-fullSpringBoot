@@ -22,16 +22,15 @@
 		th:fragment="formRow (field, typeInput, label, placeholder)">
 		<div class="col-sm-4">
 			<!-- Label field -->
-			<label th:text="${label}" th:path="firstname">RowLabel</label>
+			<label th:text="${label}">RowLabel</label>
 		</div>
 		<div class="col-sm-8">
 			<!-- input field -->
-			<input th:type="${typeInput}" th:name='${field}' class="form-control"
+			<input th:type="${typeInput}" th:field="*{__${field}__}"  class="form-control"
 				th:placeholder="${placeholder}">
-				
-			<!-- <form:input path="firstname" class="form-control" placeholder="First Name" />
-				<form:errors path="firstname" cssClass="error" /> -->
+				<div class="error" th:if="${#fields.hasErrors()}" th:errors="*{__${field}__}">firstname Error</div>				
 		</div>
+		
 	</div>
 
 	<!-- 

@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.asf.bricotuto.webapp.service.authentification.UserDetailFailureHandler;
+import com.asf.bricotuto.webapp.failurehandler.UserDetailFailureHandler;
 import com.asf.bricotuto.webapp.service.authentification.UserDetailsServiceImpl;
 
 @Configuration
@@ -18,7 +18,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	 UserDetailsServiceImpl userDetailsService;
 	  @Autowired
-	 private UserDetailFailureHandler failureHandler;
+	 private UserDetailFailureHandler userDetailfailureHandler;
 	 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -43,7 +43,7 @@ public class LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/signin")
 				.defaultSuccessUrl("/home")				
 				.usernameParameter("email").passwordParameter("password")
-				.failureHandler(failureHandler)
+				.failureHandler(userDetailfailureHandler)
 			.and()
 				.logout().logoutSuccessUrl("/home")
 			.and()

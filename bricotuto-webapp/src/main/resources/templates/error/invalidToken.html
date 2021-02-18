@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #403-static-resources},
+                                                ~{:: #403-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="403-static-resources">
+</th:block>
+
+<title>Invalid Token</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="403-mainContent" class="container">
+		<div style="text-align: center">
+			<h1 class="error" th:text="${messageException}">Message exception</h1>	
+		</div>
+	</div>
+
+</body>
+</html>

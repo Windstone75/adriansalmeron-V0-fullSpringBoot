@@ -25,11 +25,12 @@
 					data-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="images/carousel/apprenant.jpg" class="d-block w-100"
+							<img th:src="@{/images/carousel/apprenant.jpg}" class="d-block w-100"
 								alt="Apprenant">
+								
 						</div>
 						<div class="carousel-item">
-							<img src="images/carousel/apprenant2.jpg" class="d-block w-100"
+							<img th:src="@{/images/carousel/apprenant2.jpg}" class="d-block w-100"
 								alt="Apprenante">
 						</div>
 					</div>
@@ -51,6 +52,7 @@
 				
 					<img th:src="@{/images/home/certificate.png}" alt="certificate"
 						class="card-img-top">
+						
 					<div class="card-body">
 						<h5 class="card-title">Devenez dipl�m�</h5>
 						<p class="card-text">De z�ro � h�ros, obtenez un dipl�me en
@@ -60,8 +62,9 @@
 			</div>
 			<div class="col-12 col-lg-4">
 				<div class="card mb-4 mb-lg-0">
-					<img src="images/home/instruction.png" alt="instructor"
+					<img th:src="@{/images/home/instruction.png}" alt="instructor"
 						class="card-img-top">
+						
 					<div class="card-body">
 						<h5 class="card-title">Formateurs de qualit�s</h5>
 						<p class="card-text">Tous nos cours sont r�alis�s par les
@@ -71,7 +74,7 @@
 			</div>
 			<div class="col-12 col-lg-4">
 				<div class="card mb-4 mb-lg-0">
-					<img src="images/home/job.png" alt="job search"
+					<img th:src="@{/images/home/job.png}" alt="job search"
 						class="card-img-top">
 					<div class="card-body">
 						<h5 class="card-title">Un travail graranti</h5>

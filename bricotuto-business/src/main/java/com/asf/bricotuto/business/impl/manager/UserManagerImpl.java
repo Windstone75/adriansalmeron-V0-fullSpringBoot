@@ -4,6 +4,7 @@ import java.util.List;
 import com.asf.bricotuto.business.contract.manager.UserManager;
 import com.asf.bricotuto.business.service.UserService;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.exception.FunctionalException;
 
 public class UserManagerImpl  implements UserManager {
 	
@@ -23,8 +24,12 @@ public class UserManagerImpl  implements UserManager {
 	}
 
 	@Override
-	public AppUser getUserByEmail(String email) {
-		return userService.findByEmail(email);
+	public AppUser getUserByEmail(String email) throws FunctionalException {
+		AppUser user=userService.findByEmail(email);
+		if (user==null) {
+			throw new FunctionalException("Email don't exist");
+		}
+		return user;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = { "/", "/home", "/{locale:en|fr|es}/home" }, method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("index");
+		modelView.setViewName("/home");
 		return modelView;
 	}
 	
@@ -58,8 +58,8 @@ public class MenuHeaderController {
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {	
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("403");
+		modelView.setViewName("/error/403");
 		return modelView;
-	}
+	}	
 
 }

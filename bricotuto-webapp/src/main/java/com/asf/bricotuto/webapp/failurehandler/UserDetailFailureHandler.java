@@ -1,4 +1,4 @@
-package com.asf.bricotuto.webapp.service.authentification;
+package com.asf.bricotuto.webapp.failurehandler;
 
 import java.io.IOException;
 
@@ -24,8 +24,7 @@ public class UserDetailFailureHandler extends SimpleUrlAuthenticationFailureHand
 			AuthenticationException exception) throws IOException, ServletException {
 		String errorMessage;
 		String email = request.getParameter("email");
-		AppUser user=mFactory.getUserManager().getUserByEmail(email);
-		
+		AppUser user=mFactory.getAuthManager().getUserToSignIn(email);		
 		
 		 if (user!=null && !user.isEnabled()){
 			 errorMessage="User is disable";
@@ -34,7 +33,7 @@ public class UserDetailFailureHandler extends SimpleUrlAuthenticationFailureHand
 		 }else {
 			 errorMessage="Email is not found";
 		 }
-		 String redirectURL = "/login?error="+errorMessage;
+		 String redirectURL = "/signin?error="+errorMessage;
 		super.setDefaultFailureUrl(redirectURL);
         super.onAuthenticationFailure(request, response, exception);
         

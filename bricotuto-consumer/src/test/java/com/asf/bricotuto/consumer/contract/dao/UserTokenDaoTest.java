@@ -33,7 +33,7 @@ public class UserTokenDaoTest extends AbstractJUnit4SpringContextTests {
 
 	@BeforeEach
 	void setup() {
-		user = userDaoTest.findByEmail("usertest@test.com");
+		user = userDaoTest.findByEmail("usertest@babo.com");
 	}
 
 	@Test
