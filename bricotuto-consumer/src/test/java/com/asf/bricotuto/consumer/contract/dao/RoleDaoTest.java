@@ -78,8 +78,7 @@ public class RoleDaoTest extends AbstractJUnit4SpringContextTests {
 	public void testfindAndDeleteUser() {
 		System.out.println("RoleDaoTest - 3 : Delete Role");
 		try {
-			Role role = roleDaoTest.findById(idRole);
-			roleDaoTest.delete(role);
+			roleDaoTest.deleteById(idRole);
 			// Assert delete
 			assertEquals(null, roleDaoTest.findById(idRole));
 		} catch (Exception e) {

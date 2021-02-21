@@ -1,6 +1,10 @@
 package com.asf.bricotuto.business.impl.manager;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
 import com.asf.bricotuto.business.contract.manager.AuthManager;
 import com.asf.bricotuto.business.service.RoleService;
 import com.asf.bricotuto.business.service.UserService;
@@ -32,7 +36,7 @@ public class AuthManagerImpl implements AuthManager {
 	@Override
 	public UserToken saveNewUser(AppUser user) throws FunctionalException {
 		AppUser usertmp = userService.findByEmail(user.getEmail());
-		if(usertmp!=null) {
+		if (usertmp != null) {
 			throw new FunctionalException("Email already exist");
 		}
 		// Save user
@@ -48,9 +52,9 @@ public class AuthManagerImpl implements AuthManager {
 	public AppUser validateNewUserToken(String token) throws UserTokenException {
 		UserToken NewUserToken;
 		Role roleUser = null;
-		AppUser user;		
+		AppUser user;
 		// Get role and verification NewUserToken
-		NewUserToken=verificationToken(token);
+		NewUserToken = verificationToken(token);
 		roleUser = roleService.findByName("ROLE_USER");
 		// Get and update user (addRoleMembre and enable=true)
 		user = NewUserToken.getUser();
@@ -92,37 +96,46 @@ public class AuthManagerImpl implements AuthManager {
 	@Override
 	public void changeUserPasswordWithToken(String password, String token) throws UserTokenException {
 		// Get User and verification Token
-		UserToken resetPasswordToken=verificationToken(token);
+		System.out.println("avant verif string token :--->"+token+"<----");
+		UserToken resetPasswordToken = verificationToken(token);
+		System.out.println("apres verif");
 		AppUser user = resetPasswordToken.getUser();
 		// change password and update User
 		user.setPassword(password);
 		userService.update(user);
 		// Delete ResetPasswordtoken
-		UserToken confirmationToken = userTokenService.getUserTokenByToken(token);
-		userTokenService.delete(confirmationToken);
+		userTokenService.delete(resetPasswordToken);
 
 	}
-	
-	private UserToken verificationToken(String token) throws UserTokenException{
+
+	private UserToken verificationToken(String token) throws UserTokenException {
 		// Get and verification Token
-			UserToken	userToken = userTokenService.getUserTokenByToken(token);
-				if (userToken == null) {
-					throw new UserTokenException("Invalid Token");
-				}
-				Calendar cal = Calendar.getInstance();
-				if ((userToken.getExpiryDt().getTime() - cal.getTime().getTime()) <= 0) {
-					throw new UserTokenException("Token Expired");
-				}
-				
-				return userToken;
-				
-		
+		UserToken userToken = userTokenService.getUserTokenByToken(token);
+		if (userToken == null) {
+			throw new UserTokenException("Invalid Token");
+		}
+		Calendar cal = Calendar.getInstance();
+		if ((userToken.getExpiryDt().getTime() - cal.getTime().getTime()) <= 0) {
+			throw new UserTokenException("Token Expired");
+		}
+
+		return userToken;
+
 	}
 
-	
 	@Override
 	public AppUser getUserToSignIn(String email) {
 		return userService.findByEmail(email);
 	}
 
+	@Override
+	public List<String> getRolesToSignIn(Long userId) {
+		List<String> listerole = new ArrayList<String>();
+		List<Role> ltemp = userService.getRoleOfUserById(userId);
+
+		for (Role r : ltemp) {
+			listerole.add(r.getName());
+		}
+		return listerole;
+	}
 }

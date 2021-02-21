@@ -19,8 +19,8 @@ public class RoleService extends AbstractService{
 		return getDaoFactory().getRoleDao().update(role);
 	}
 
-	public void delete(Role role) {
-		this.getDaoFactory().getRoleDao().delete(role);;
+	public void deleteById(Long id) {
+		this.getDaoFactory().getRoleDao().deleteById(id);;
 		
 	}
 

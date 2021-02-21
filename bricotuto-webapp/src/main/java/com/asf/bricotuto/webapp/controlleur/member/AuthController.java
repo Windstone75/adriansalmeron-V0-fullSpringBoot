@@ -1,4 +1,4 @@
-package com.asf.bricotuto.webapp.controlleur;
+package com.asf.bricotuto.webapp.controlleur.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.UserToken;
@@ -124,9 +125,10 @@ public class AuthController {
 	@RequestMapping(value = { "/{locale:en|fr|es}/regitrationConfirm",
 			"/regitrationConfirm" }, method = RequestMethod.GET)
 	public ModelAndView confirmRegistration(HttpServletRequest request, ModelAndView modelAndView,
-			@RequestParam("token") String token) {
+			@RequestParam("token") String token, final RedirectAttributes redirectAttributes) {
 		try {
 			authService.validateRegistrationToken(token);
+			redirectAttributes.addFlashAttribute("flashSuccess", "Your account is activate!");
 			modelAndView.setViewName("redirect:/signin");
 			return modelAndView;
 		} catch (UserTokenException e) {
@@ -196,20 +198,14 @@ public class AuthController {
 	@RequestMapping(value = { "/{locale:en|fr|es}/changePassword", "/changePassword" }, method = RequestMethod.GET)
 	public ModelAndView showChangePasswordPage(HttpServletRequest request, @RequestParam("token") String token,
 			ModelAndView modelAndView) {
-		System.out.println("****************");
+		System.out.println("**************** "+token);
 		AppUser user;
-		// manage SessionToken (POST->get)
-		HttpSession session = request.getSession();
-		Object tokensession = session.getAttribute("resetpasswordtoken");
-		if (token == null && tokensession != null) {
-			token = tokensession.toString();
-		} else if (token != null && tokensession == null) {
-			session.setAttribute("resetpasswordtoken", token);
-		}
+	
 
 		try {
 			user = authService.validateResetPasswordToken(token);
 			modelAndView.addObject("user", user);
+			modelAndView.addObject("tokenReset",token);
 			modelAndView.setViewName("/authentification/changePassword");
 			return modelAndView;
 		} catch (UserTokenException e) {
@@ -230,21 +226,22 @@ public class AuthController {
 	 */
 	@RequestMapping(value = { "/{locale:en|fr|es}/changePassword", "/changePassword" }, method = RequestMethod.POST)
 	public ModelAndView ChangePassword(HttpServletRequest request, @ModelAttribute("user") AppUser user,
-			ModelAndView modelAndView) {
+			ModelAndView modelAndView, final RedirectAttributes redirectAttributes) {
+		
 		try {
-			System.out.println("***********************************Debut change password post*****************");
-			HttpSession session = request.getSession();
-			String token = session.getAttribute("resetpasswordtoken").toString();
-
+			String token = request.getParameter("tokenReset");
+			System.out.println("*********st*****************"+token);
 			// Verification password Match
 			if (!user.getPassword().equals(user.getMatchingPassword())) {
-				modelAndView.addObject("errorform", "Password don't match");
-				modelAndView.setViewName("/authentification/changePassword");
+				redirectAttributes.addFlashAttribute("errorform", "Password don't match");
+				modelAndView.setViewName("redirect:/changePassword?token="+token);
 				return modelAndView;
 			}
 			// update User (user,token)
+			
 			authService.changeUserPasswordWithToken(user.getPassword(), token);
-			modelAndView.setViewName("/authentification/signin");
+			redirectAttributes.addFlashAttribute("flashSuccess", "Reset password successfully !");
+			modelAndView.setViewName("redirect:/signin");
 			return modelAndView;
 			
 

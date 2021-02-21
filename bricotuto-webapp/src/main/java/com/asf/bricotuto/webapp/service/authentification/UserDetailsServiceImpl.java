@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl extends AbstractResource implements UserDeta
 			vUser = getManagerFactory().getAuthManager().getUserToSignIn(email);
 	
 
-		List<String> roleNames = getManagerFactory().getUserManager().getRolesOfUserById(vUser.getUserId());
+		List<String> roleNames = getManagerFactory().getAuthManager().getRolesToSignIn(vUser.getUserId());
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		if (roleNames != null) {
 			for (String role : roleNames) {

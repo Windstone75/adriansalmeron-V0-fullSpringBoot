@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.asf.bricotuto.consumer.contract.dao.UserDao;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
 @SpringBootTest
 @ContextConfiguration(locations = ("classpath:/config/consumerContext.xml"))
@@ -86,7 +87,7 @@ public class UserDaoTest extends AbstractJUnit4SpringContextTests {
 		try {
 			AppUser user = udDaoTest.findByEmail(userEmail);
 			//Assert delete
-			udDaoTest.delete(user);
+			udDaoTest.deleteById(user.getUserId());
 			assertEquals(udDaoTest.findByEmail(userEmail), null);
 		} catch (Exception e) {
 			System.out.println("Error UserDaoTest - 3 : " + e);
@@ -116,7 +117,7 @@ public class UserDaoTest extends AbstractJUnit4SpringContextTests {
 		System.out.println("UserDaoTest : Get list Role by userId");
 		try {
 			long id = 1;
-			List<String> l = udDaoTest.getRoleOfUserById(id);
+			List<Role> l = udDaoTest.getRoleOfUserById(id);
 			//Assert getRoleOfUserById
 			assertTrue(l.size() > 0);
 		} catch (Exception e) {

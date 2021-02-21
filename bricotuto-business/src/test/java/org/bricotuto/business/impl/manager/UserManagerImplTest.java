@@ -22,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.asf.bricotuto.business.impl.manager.UserManagerImpl;
 import com.asf.bricotuto.business.service.UserService;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
 @SpringBootTest
 @ContextConfiguration(locations = ("classpath:/config/businessContext.xml"))
@@ -39,10 +40,11 @@ public class UserManagerImplTest {
 	static final String password = "passTest";
 	static final String email = "test@gmail.com";	
 	static final int nbUser = 5;
-	static final List<String> listRole = List.of("UserRoleTest","AdminRoleTest");
+	
 	
 	static AppUser user;
 	static List<AppUser> listUsers;
+	static  List<Role> listRole;
 
 	@BeforeAll
 	public static void init() {
@@ -52,6 +54,10 @@ public class UserManagerImplTest {
 		for (int i = 0; i < nbUser; i++) {
 			listUsers.add(new AppUser(firstname+"-" + i,lastname+"-" + i, password+"-" + i, email + "-" + i));
 		}
+		
+		listRole = new ArrayList<Role>();
+		listRole.add(new Role("UserRoleTest"));
+		listRole.add(new Role("AdminRoleTest"));
 	}
 
 	@BeforeEach
@@ -125,7 +131,7 @@ public class UserManagerImplTest {
 		try {
 			// Mock Method
 			Mockito.when(userService.getRoleOfUserById(idUser)).thenReturn(listRole);
-			List<String> lrole = userManagerImpl.getRolesOfUserById(idUser);
+			List<Role> lrole = userManagerImpl.getRolesOfUserById(idUser);
 			//Assert
 			assertThat(lrole.size() == 2).isTrue();
 
@@ -176,9 +182,9 @@ public class UserManagerImplTest {
 		System.out.println("UserManagerImplTest - 7 : Delete User");
 		try {
 			// Mock Method
-			userManagerImpl.deleteUser(user);
+			userManagerImpl.deleteUserById(user.getUserId());
 			// verify methode void
-			verify(userService).delete(user);
+			verify(userService).deleteById(user.getUserId());
 
 		} catch (Exception e) {
 			System.out.println("Error UserManagerImplTest - 7 : " + e);

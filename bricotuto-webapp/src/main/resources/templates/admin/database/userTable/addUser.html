@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/admin-layout :: layout(
+												~{::title},
+                                                ~{:: #addUser-static-resources},
+                                                ~{:: #addUser-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="addUser-static-resources">
+</th:block>
+
+<title>Add New Role</title>
+
+</head>
+<body>
+
+	<!-- Main content body layout  -->
+	<div id="addUser-mainContent" class="container">
+
+
+
+		<form th:name='signup' th:action="@{/admin/database/userTable/add}"
+			th:object="${user}" th:method='post'>
+			<h2 class="text-center">Add User</h2>
+			<h5 class="text-center">without role and disable</h5>
+			<br>
+
+			<div class="text-center alert alert-danger"
+				th:if="${errorform != null}">
+				<th:span class="error" th:text="${errorform}">Error Form</th:span>
+			</div>
+			<div
+				th:replace="_fragments/form-fragment.html :: 
+					formRow(field='firstname',typeInput='text' ,label='FirstName',placeholder='')">
+			</div>
+			<div
+				th:replace="_fragments/form-fragment.html :: 
+					formRow(field='lastname',typeInput='text' ,label='LastName',placeholder='')">
+			</div>
+			<div
+				th:replace="_fragments/form-fragment.html :: 
+					formRow(field='email',typeInput='text' ,label=#{login.email},placeholder='exemple@email.com')">
+			</div>
+			<div
+				th:replace="_fragments/form-fragment.html :: 
+					formRow(field='password',typeInput='password' ,label='Password',placeholder='')">
+			</div>
+			<div
+				th:insert="_fragments/form-fragment.html :: 
+					formRow(field='matchingPassword',typeInput='password' ,label='Confirm password',placeholder='')">
+			</div>
+			<div
+				th:replace="_fragments/form-fragment.html :: 
+					formSubmitButton (label='Add user', value='', style='btn btn-primary btn-block')">
+			</div>
+		</form>
+	</div>
+
+
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.asf.bricotuto.business.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
 @Service
 public class UserService extends AbstractService {
@@ -19,8 +20,8 @@ public class UserService extends AbstractService {
 		return getDaoFactory().getUserDao().update(user);
 	}
 
-	public void delete(AppUser user) {
-		this.getDaoFactory().getUserDao().delete(user);
+	public void deleteById(Long id) {
+		this.getDaoFactory().getUserDao().deleteById(id);
 	}
 
 	public AppUser findById(Long pId) {
@@ -31,7 +32,7 @@ public class UserService extends AbstractService {
 		return getDaoFactory().getUserDao().findByEmail(email);		
 	}	
 
-	public List<String> getRoleOfUserById(Long userId) {
+	public List<Role> getRoleOfUserById(Long userId) {
 		return getDaoFactory().getUserDao().getRoleOfUserById(userId);
 	}
 

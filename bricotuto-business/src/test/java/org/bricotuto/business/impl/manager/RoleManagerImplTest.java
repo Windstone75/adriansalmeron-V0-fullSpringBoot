@@ -133,9 +133,9 @@ public class RoleManagerImplTest {
 		System.out.println("RoleManagerImplTest - 5 : Delete Role");
 		try {
 			// Mock Method
-			roleManagerImpl.deleteRole(roleTest);
+			roleManagerImpl.deleteRoleById(roleTest.getRoleId());
 			// verify methode void
-			verify(roleService).delete(roleTest);
+			verify(roleService).deleteById(roleTest.getRoleId());
 
 		} catch (Exception e) {
 			System.out.println("Error RoleManagerImplTest - 5 : " + e);

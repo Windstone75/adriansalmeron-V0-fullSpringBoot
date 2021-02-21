@@ -2,6 +2,7 @@ package com.asf.bricotuto.consumer.contract.dao;
 
 import java.util.List;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 
 public interface UserDao {
 
@@ -9,7 +10,7 @@ public interface UserDao {
 
 	AppUser update(AppUser user);
 
-	void delete(AppUser user);
+	void deleteById(long id);
 	
 	AppUser findById(long id);
 
@@ -17,6 +18,6 @@ public interface UserDao {
 	
 	List<AppUser> findAll();
 
-	List<String> getRoleOfUserById(Long userId);
+	List<Role> getRoleOfUserById(Long userId);
 
 }

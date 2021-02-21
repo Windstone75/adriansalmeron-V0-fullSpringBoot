@@ -72,5 +72,23 @@ public class Role implements Serializable {
 		String result = "Role : \n -->id :" + this.roleId + "\n -->name :" +this.name;
 		return result;
 	}
+	
+	@Override
+	  public boolean equals(Object obj) {
+	    if (this == obj)
+	     return true;
+	    if (obj == null)
+	      return false;
+	    if (getClass() != obj.getClass())
+	      return false;
+	    //equal attribute
+	    Role other = (Role) obj;
+	    if (roleId != other.roleId)
+	      return false;
+	    if (name != other.name)
+		      return false;
+	    
+	    return true;
+	  }
 
 }

@@ -10,7 +10,7 @@ public interface RoleDao {
 
 	Role update(Role role);
 
-	void delete(Role role);
+	void deleteById(long id);
 
 	Role findById(long id);
 	

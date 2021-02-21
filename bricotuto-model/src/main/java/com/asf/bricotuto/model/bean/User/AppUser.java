@@ -14,8 +14,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.asf.bricotuto.model.validator.ValidEmail;
 import javax.persistence.JoinColumn;
 
@@ -55,6 +59,8 @@ public class AppUser implements Serializable {
 	@JoinTable(name = "Users_Roles_Associations", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	private List<Role> roles = new ArrayList<>();
 	private boolean enabled;
+	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date inscriptionDt;
 
 	public AppUser() {

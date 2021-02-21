@@ -1,36 +1,33 @@
-package com.asf.bricotuto.webapp.controlleur.admin.database;
+package com.asf.bricotuto.webapp.controlleur.admin;
 
 
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.Role;
 import com.asf.bricotuto.webapp.service.admin.RoleAdminService;
 import com.asf.bricotuto.webapp.service.admin.UserAdminService;
 
 @Controller
-public class TableAdminController {
+public class DatabaseController {
 	
 	private  UserAdminService uService = new UserAdminService();
 	private RoleAdminService rService = new RoleAdminService();
 	
-	@RequestMapping(value = { "/admin/userTableAdmin","/{locale:en|fr|es}/admin/userTableAdmin"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/admin/database/userTable","/{locale:en|fr|es}/admin/userTable"})
     public ModelAndView UserTableAdminPage() {
 		List<AppUser> users = uService.getListUser();
-		System.out.println("nb user :"+users.size());
-        return new ModelAndView("admin/userTableAdmin","users",users);
+        return new ModelAndView("/admin/database/userTable/home","users",users);
     }
 
 	
-	@RequestMapping(value = { "/admin/roleTableAdmin","/{locale:en|fr|es}/admin/roleTableAdmin"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/admin/database/roleTable","/{locale:en|fr|es}/admin/database/roleTable"})
 	public ModelAndView RoleTableAdminPage() {
 		List<Role> roles = rService.getListRole();
-        return new ModelAndView("admin/roleTableAdmin","roles",roles);
+        return new ModelAndView("/admin/database/roleTable/home","roles",roles);
 		
 	}
 

@@ -40,15 +40,12 @@ public class UserDaoImpl extends AbstractDaoImpl<AppUser> implements UserDao {
 		}
 		return user;
 	}
-
+	
 	@Override
-	public List<String> getRoleOfUserById(Long userId) {
-		List<String> listerole = new ArrayList<String>();
+	public List<Role> getRoleOfUserById(Long userId) {
 		AppUser user = findById(userId);
-		for (Role r : user.getRoles()) {
-			listerole.add(r.getName());
-		}
-		return listerole;
+		return user.getRoles();
 	}
+
 
 }

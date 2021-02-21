@@ -3,7 +3,9 @@ package com.asf.bricotuto.business.impl.manager;
 import java.util.List;
 import com.asf.bricotuto.business.contract.manager.RoleManager;
 import com.asf.bricotuto.business.service.RoleService;
+import com.asf.bricotuto.model.bean.User.AppUser;
 import com.asf.bricotuto.model.bean.User.Role;
+import com.asf.bricotuto.model.exception.FunctionalException;
 
 public class RoleManagerImpl implements RoleManager {
 
@@ -24,25 +26,33 @@ public class RoleManagerImpl implements RoleManager {
 
 	@Override
 	public Role getRoleById(Long id) {
-		// TODO Auto-generated method stub
 		return roleService.findById(id);
 	}
 
 	@Override
-	public void saveRole(Role role) {
+	public void saveRole(Role role) throws FunctionalException{
+		
+		Role roletmp = roleService.findByName(role.getName());
+		if(roletmp!=null) {
+			throw new FunctionalException("Role already exist");
+		}
 		roleService.save(role);
 		
 	}
 
 	@Override
-	public void updateRole(Role role) {
+	public void updateRole(Role role) throws FunctionalException {
+		Role roletmp = roleService.findByName(role.getName());
+		if(roletmp!=null && role.getRoleId()!=roletmp.getRoleId()) {
+			throw new FunctionalException("Role already exist");
+		}
 		roleService.update(role);
 		
 	}
 
 	@Override
-	public void deleteRole(Role role) {
-		roleService.delete(role);
+	public void deleteRoleById(Long id) {
+		roleService.deleteById(id);
 		
 	}
 }

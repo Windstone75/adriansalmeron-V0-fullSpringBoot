@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #addRole-static-resources},
+                                                ~{:: #addRole-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="signup-static-resources">
+</th:block>
+
+<title>Add New Role</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="addRole-mainContent" class="container">
+		<div class="login-form">
+
+			<form th:name='addRole'
+				th:action="@{/admin/database/roleTable/add}"
+				th:object="${role}" th:method='post'>
+				<h2 class="text-center">Add New Role</h2>
+				<div class="text-center alert alert-danger"
+				th:if="${errorform != null}">
+				<th:span class="error" th:text="${errorform}">Error Form</th:span>
+			</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='name',typeInput='text' ,label='Name',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formSubmitButton (label='Add role', value='', style='btn btn-primary btn-block')">
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+
+</body>
+</html>

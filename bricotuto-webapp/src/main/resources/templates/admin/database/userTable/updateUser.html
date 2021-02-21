@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/admin-layout :: layout(
+												~{::title},
+                                                ~{:: #updateUser-static-resources},
+                                                ~{:: #updateUser-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="updateUser-static-resources">
+	<!-- Include the default multi select -->
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
+	<!-- Include plugin -->
+	<script
+		src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
+</th:block>
+
+
+<title>Update User</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="updateUser-mainContent" class="container">
+		<div class="login-form">
+
+			<form th:name='updateUser'
+				th:action="@{/admin/database/userTable/update/{id}(id=${user.userId})}"
+				th:object="${user}" th:method='post'>
+
+
+				<h2 class="text-center">Update User</h2>
+
+				<div class="text-center alert alert-danger"
+					th:if="${errorform != null}">
+					<th:span class="error" th:text="${errorform}">Error Form</th:span>
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRowDisable(field='userId',typeInput='text' ,label='User Id',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='firstname',typeInput='text' ,label='FirstName',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='lastname',typeInput='text' ,label='LastName',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='email',typeInput='text' ,label=#{login.email},placeholder='exemple@email.com')">
+				</div>
+
+
+				<!-- ***************************************************************************************
+************************ Pour ajout et suppresion role user  via select list	
+				<div class="form-group row">
+					<div class="col-sm-4">Role(s) :</div>
+					<div class="col-sm-8">
+						<select id="my-select" multiple="multiple">
+								<option th:each="role: ${listeRole}" th:value="${role.roleId}"
+									th:text="${role.name}" th:selected="${#lists.contains(listeRoleNameUser,role.name)}" >{role.name}</option>
+						</select>
+					</div>
+				</div>
+				<!-- A multiple select element 
+
+				<script>
+					// Initialize multiple select on your regular select
+					$("#my-select").multipleSelect({
+						filter : true
+
+					});
+				</script>	-->
+
+
+				<div class="form-group row">
+					<div class="col-sm-4">Role(s) :</div>
+					<div class="col-sm-8">
+						<div th:each="role: ${listeRole}">
+							<input th:id="${role.name}"
+								th:checked="${#lists.contains(listeRoleNameUser,role.name)}"
+								type="checkbox" th:name="${role.name}" th:value="${role.roleId}">
+							<label th:text="${role.name}">RowLabel</label>
+						</div>
+					</div>
+				</div>
+				<div style="visibility: hidden; display: none;">
+					<div
+						th:replace="_fragments/form-fragment.html :: 
+					formRow(field='password',typeInput='text' ,label='Password',placeholder='')">
+					</div>
+
+					<div
+						th:replace="_fragments/form-fragment.html :: 
+					formRow(field='inscriptionDt',typeInput='text' ,label='inscription Dt',placeholder='')">
+					</div>
+				</div>
+
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='enabled',typeInput='text' ,label='Enable',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formSubmitButton (label='Update', value='', style='btn btn-primary btn-block')">
+				</div>
+			</form>
+		</div>
+
+
+
+	</div>
+
+
+</body>
+</html>

@@ -3,13 +3,14 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+
 <meta charset="UTF-8" />
 <title>Admin Menu Fragments</title>
 </head>
 <body>
 	<!-- Menu -->
 	<div th:fragment="adminMenu">
-	
+
 		<div class="sidebar">
 			<div class="sidebar-menu-chapter">General</div>
 			<a class="sidebar-menu-link" th:href="@{/admin}"> <span
@@ -23,8 +24,8 @@
 				</span> Table
 			</button>
 			<div class="acordion-panel">
-				<a class="sidebar-submenu-link" th:href="@{/admin/userTableAdmin}" >User</a>
-				<a class="sidebar-submenu-link" th:href="@{/admin/roleTableAdmin}">Role</a>
+				<a class="sidebar-submenu-link" th:href="@{/admin/database/userTable}" >User</a>
+				<a class="sidebar-submenu-link" th:href="@{/admin/database/roleTable}">Role</a>
 			</div>
 		</div>
 		<!-- Script accordion event-->

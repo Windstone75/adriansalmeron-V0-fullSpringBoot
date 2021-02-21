@@ -4,6 +4,7 @@ import java.util.List;
 import com.asf.bricotuto.business.contract.manager.UserManager;
 import com.asf.bricotuto.business.service.UserService;
 import com.asf.bricotuto.model.bean.User.AppUser;
+import com.asf.bricotuto.model.bean.User.Role;
 import com.asf.bricotuto.model.exception.FunctionalException;
 
 public class UserManagerImpl  implements UserManager {
@@ -38,22 +39,31 @@ public class UserManagerImpl  implements UserManager {
 	}
 
 	@Override
-	public List<String> getRolesOfUserById(Long userId) {		
+	public List<Role> getRolesOfUserById(Long userId) {		
 		return userService.getRoleOfUserById(userId);
 	}
 
 	@Override
-	public void saveUser(AppUser user) {
+	public void saveUser(AppUser user) throws FunctionalException {
+		AppUser usertmp = userService.findByEmail(user.getEmail());
+		if(usertmp!=null) {
+			throw new FunctionalException("Email already exist");
+		}
 		userService.save(user);
 	}
 
 	@Override
-	public void updateUser(AppUser user) {
+	public void updateUser(AppUser user) throws FunctionalException {
+		AppUser usertmp = userService.findByEmail(user.getEmail());
+		//If email exist with other userID
+		if(usertmp!=null && user.getUserId()!=usertmp.getUserId()) {
+			throw new FunctionalException("Email already exist");
+		}
 		userService.update(user);		
 	}
 
 	@Override
-	public void deleteUser(AppUser user) {
-		userService.delete(user);		
+	public void deleteUserById(Long id) {
+		userService.deleteById(id);		
 	}
 }

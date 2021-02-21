@@ -31,9 +31,23 @@
 		th:insert="~{/_fragments/header-fragments :: menu}">Header of
 		main-layout</div>
 
+
 	<!-- main content body  -->
-	<div class="main-content" th:insert="${mainContent} ?: ~{}">
-		<p>Main content of main-layout</p>
+	<div class="main-content">
+		<!-- Globale Flash message -->
+		<div th:if="${flashSuccess}" class="alert alert-success text-center"
+			role="alert">
+			<label th:text="${flashSuccess}">flash Success message</label>
+		</div>
+		<div th:if="${flashAlert}" class="alert alert-danger text-center"
+			role="alert">
+			<label th:text="${flashAlert}">flash Alert message</label>
+		</div>
+		<!-- Main content -->
+		<div th:insert="${mainContent} ?: ~{}">
+			<p>Main content of main-layout</p>
+		</div>
+
 	</div>
 
 	<!-- Footer content body  -->

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/main-layout :: layout(
+												~{::title},
+                                                ~{:: #updateRole-static-resources},
+                                                ~{:: #updateRole-mainContent}
+                                               )}">
+<head>
+<!-- Block javaScript, CSS source files -->
+<th:block id="updateRole-static-resources">
+</th:block>
+
+<title>Update Role</title>
+
+</head>
+<body>
+	<!-- Main content body layout  -->
+	<div id="updateRole-mainContent" class="container">
+		<div class="login-form">
+
+			<form th:name='signup' th:action="@{/admin/database/roleTable/update/{id}(id=${role.roleId})}" th:object="${role}"
+				th:method='post'>
+
+
+				<h2 class="text-center">Update Role</h2>
+<div class="text-center alert alert-danger"
+				th:if="${errorform != null}">
+				<th:span class="error" th:text="${errorform}">Error Form</th:span>
+			</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRowDisable(field='roleId',typeInput='text' ,label='Role Id',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formRow(field='name',typeInput='text' ,label='Name',placeholder='')">
+				</div>
+				<div
+					th:replace="_fragments/form-fragment.html :: 
+					formSubmitButton (label='Update', value='', style='btn btn-primary btn-block')">
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

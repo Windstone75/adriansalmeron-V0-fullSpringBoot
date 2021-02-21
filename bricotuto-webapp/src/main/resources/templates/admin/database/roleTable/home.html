@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/_fragments/admin-layout :: layout(
+												~{::title},
+                                                ~{:: #roleTableAdmin-static-resources},
+                                                ~{:: #roleTableAdmin-mainContent}
+                                               )}">
+<head>
+
+<!-- Block javaScript, CSS source files -->
+<th:block id="roleTableAdmin-static-resources">
+
+	<script th:src="@{/js/table.js}"></script>
+
+</th:block>
+
+<title>Table Role</title>
+
+</head>
+<body>
+
+	<!-- Main content body  -->
+	<div id="roleTableAdmin-mainContent" class="container">
+		<!-- Main content body  -->
+		<div class="breadcrumb ">
+			<h2>Table Role</h2>
+		</div>
+		<!-- Zone table -->
+		<div style="overflow-x: auto;">
+			<p>
+				Search : <input id="myInput" type="text" placeholder="Search..">
+				<a th:href="@{/admin/database/roleTable/add}"
+					class="btn btn-primary">Add role</a>
+			</p>
+
+			<table id="myTable">
+				<thead>
+					<tr>
+						<th data-type="number">roleId <img
+							th:src="@{/images/iconeSort.png}" width="20" height="20"
+							align="right" />
+						</th>
+						<th data-type="string">name<img
+							th:src="@{/images/iconeSort.png}" width="20" height="20"
+							align="right" /></th>
+						<th data-type="string">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="role : ${roles}">
+						<tr>
+							<td th:text="${role.roleId}">roleId</td>
+							<td th:text="${role.name}">RoleName</td>
+							<td><a
+								th:href="@{/admin/database/roleTable/update/{id}(id=${role.roleId})}"
+								class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a>
+								<a
+								th:href="@{/admin/database/roleTable/delete/{id}(id=${role.roleId})}"
+								class="btn btn-danger" onclick="return confirm('Are you sure?')"><i
+									class="fas fa-user-times ml-2"></i></a></td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

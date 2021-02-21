@@ -3,6 +3,7 @@ package com.asf.bricotuto.business.contract.manager;
 import java.util.List;
 
 import com.asf.bricotuto.model.bean.User.Role;
+import com.asf.bricotuto.model.exception.FunctionalException;
 
 public interface RoleManager {
 
@@ -10,9 +11,9 @@ public interface RoleManager {
  	
  	Role getRoleById(Long id);
  	
- 	void saveRole(Role role);
+ 	void saveRole(Role role) throws FunctionalException;
 
-	void updateRole(Role role);
+	void updateRole(Role role) throws FunctionalException;
 
-	void deleteRole(Role role);
+	void deleteRoleById(Long id);
 }
