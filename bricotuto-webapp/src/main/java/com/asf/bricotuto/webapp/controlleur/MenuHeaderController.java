@@ -14,7 +14,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = { "/", "/home", "/{locale:en|fr|es}/home" }, method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("/home");
+		modelView.setViewName("home");
 		return modelView;
 	}
 	
@@ -25,7 +25,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = { "/about", "/{locale:en|fr|es}/about" }, method = RequestMethod.GET)
 	public ModelAndView showAboutHomePage() {
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("/about/homeAbout");
+		modelView.setViewName("about/homeAbout");
 		return modelView;
 	}
 
@@ -36,7 +36,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = { "/member", "/{locale:en|fr|es}/member" }, method = RequestMethod.GET)
 	public ModelAndView showMemberHomePage() {
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("/member/homeMember");
+		modelView.setViewName("member/homeMember");
 		return modelView;
 	}
 
@@ -47,7 +47,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = { "/admin", "/{locale:en|fr|es}/admin" }, method = RequestMethod.GET)
 	public ModelAndView showAdminHomepage() {
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("/admin/homeAdmin");
+		modelView.setViewName("admin/homeAdmin");
 		return modelView;
 	}
 
@@ -58,7 +58,7 @@ public class MenuHeaderController {
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {	
 		ModelAndView modelView = new ModelAndView();
-		modelView.setViewName("/error/403");
+		modelView.setViewName("error/403");
 		return modelView;
 	}	
 

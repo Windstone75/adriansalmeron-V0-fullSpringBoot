@@ -13,7 +13,7 @@ public class GlobaleFailureHandler {
 	public ModelAndView handleAnyException(HttpServletRequest request, Exception e) {
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/error/404");
+		modelAndView.setViewName("error/404");
 		return modelAndView;
 	}
 }

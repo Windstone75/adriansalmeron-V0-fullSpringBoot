@@ -6,7 +6,7 @@ import com.asf.bricotuto.business.contract.ManagerFactory;
 
 public abstract class AbstractResource {
 	
-	@Autowired
+
     private static ManagerFactory managerFactory;
 
     public static ManagerFactory getManagerFactory() {

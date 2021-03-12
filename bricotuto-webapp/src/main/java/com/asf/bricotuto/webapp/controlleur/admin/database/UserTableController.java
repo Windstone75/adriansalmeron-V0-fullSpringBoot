@@ -24,7 +24,7 @@ public class UserTableController {
 	
 	private RoleAdminService roleAdminService = new RoleAdminService();
 	private UserAdminService userAdminService = new UserAdminService();
-	private String viewHomeMapping = "/admin/database/userTable";
+	private String viewHomeMapping = "admin/database/userTable";
 
 	/**
 	 * Show Add User Form
@@ -61,7 +61,7 @@ public class UserTableController {
 			userAdminService.addUser(user);
 			
 			redirectAttributes.addFlashAttribute("flashSuccess",messageflashSuccess);
-			return new ModelAndView("redirect:" + viewHomeMapping);
+			return new ModelAndView("redirect:/admin/database/userTable");
 			
 		} catch (FunctionalException funcEx) {
 			modelAndView.addObject("errorform", funcEx.getMessage());
@@ -108,7 +108,7 @@ public class UserTableController {
 			}
 			userAdminService.updateUser(user);
 			redirectAttributes.addFlashAttribute("flashSuccess",messageflash);
-			return new ModelAndView("redirect:" + viewHomeMapping);
+			return new ModelAndView("redirect:/admin/database/userTable");
 			
 		} catch (FunctionalException funcEx) {
 			modelAndView.addObject("errorform", funcEx.getMessage());			
@@ -128,7 +128,7 @@ public class UserTableController {
 		userAdminService.deleteUserById(id);		
 		
 		redirectAttributes.addFlashAttribute("flashSuccess",messageflash);
-		return new ModelAndView("redirect:" + viewHomeMapping);
+		return new ModelAndView("redirect:/admin/database/userTable");
 	}
 
 }

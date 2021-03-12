@@ -1,3 +1,0 @@
-cd /opt/tomcat/webapps/
-
-cp /home/adrian/workspace-eclipse/BricoTuto/bricotuto-webapp/target/bricotuto-webapp-1.0-SNAPSHOT.war Bricotuto.war

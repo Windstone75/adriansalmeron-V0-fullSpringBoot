@@ -1,13 +1,11 @@
 package com.asf.bricotuto.webapp.controlleur.member;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,7 +48,7 @@ public class AuthController {
 		if (error != null) {
 			model.addObject("error", error);
 		}
-		model.setViewName("/authentification/signin");
+		model.setViewName("authentification/signin");
 		return model;
 	}
 
@@ -66,7 +64,7 @@ public class AuthController {
 		ModelAndView model = new ModelAndView();
 		AppUser user = new AppUser();
 		model.addObject("user", user);
-		model.setViewName("/authentification/signup");
+		model.setViewName("authentification/signup");
 		return model;
 	}
 
@@ -83,7 +81,7 @@ public class AuthController {
 	public ModelAndView registerUserAccount(@ModelAttribute("user") @Validated AppUser user,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
-		model.setViewName("/authentification/signup");
+		model.setViewName("authentification/signup");
 
 		Boolean isPasswordMatch = !user.getPassword().equals(user.getMatchingPassword());
 		try {
@@ -101,7 +99,7 @@ public class AuthController {
 			// send email confirmation
 			emailService.sendConfirmationTokenMail(user.getEmail(), coToken.getToken());
 			model.addObject("user", user);
-			model.setViewName("/authentification/successRegister");
+			model.setViewName("authentification/successRegister");
 			return model;
 
 		} catch (FunctionalException funcEx) {
@@ -133,7 +131,7 @@ public class AuthController {
 			return modelAndView;
 		} catch (UserTokenException e) {
 
-			modelAndView.setViewName("/error/invalidToken");
+			modelAndView.setViewName("error/invalidToken");
 			modelAndView.addObject("messageException", e.getMessage());
 			return modelAndView;
 		}
@@ -150,7 +148,7 @@ public class AuthController {
 	public ModelAndView showResetPassword(ModelAndView modelAndView) {
 
 		modelAndView.addObject("user", new AppUser());
-		modelAndView.setViewName("/authentification/forgotPassword");
+		modelAndView.setViewName("authentification/forgotPassword");
 		return modelAndView;
 	}
 
@@ -173,14 +171,14 @@ public class AuthController {
 			// send email reset
 			emailService.sendResetPasswordMail(coToken.getUser().getEmail(), coToken.getToken());
 
-			modelAndView.setViewName("/authentification/successRegister");
+			modelAndView.setViewName("authentification/successRegister");
 			return modelAndView;
 
 		} catch (FunctionalException funcEx) {
 			// Initialise Show ForgotPassword
 			modelAndView.addObject("errorform", funcEx.getMessage());
 			modelAndView.addObject("user", new AppUser());
-			modelAndView.setViewName("/authentification/forgotPassword");
+			modelAndView.setViewName("authentification/forgotPassword");
 
 			return modelAndView;
 		}
@@ -198,7 +196,6 @@ public class AuthController {
 	@RequestMapping(value = { "/{locale:en|fr|es}/changePassword", "/changePassword" }, method = RequestMethod.GET)
 	public ModelAndView showChangePasswordPage(HttpServletRequest request, @RequestParam("token") String token,
 			ModelAndView modelAndView) {
-		System.out.println("**************** "+token);
 		AppUser user;
 	
 
@@ -206,10 +203,10 @@ public class AuthController {
 			user = authService.validateResetPasswordToken(token);
 			modelAndView.addObject("user", user);
 			modelAndView.addObject("tokenReset",token);
-			modelAndView.setViewName("/authentification/changePassword");
+			modelAndView.setViewName("authentification/changePassword");
 			return modelAndView;
 		} catch (UserTokenException e) {
-			modelAndView.setViewName("/error/invalidToken");
+			modelAndView.setViewName("error/invalidToken");
 			modelAndView.addObject("messageException", e.getMessage());
 			return modelAndView;
 		}
@@ -230,7 +227,6 @@ public class AuthController {
 		
 		try {
 			String token = request.getParameter("tokenReset");
-			System.out.println("*********st*****************"+token);
 			// Verification password Match
 			if (!user.getPassword().equals(user.getMatchingPassword())) {
 				redirectAttributes.addFlashAttribute("errorform", "Password don't match");
@@ -246,7 +242,7 @@ public class AuthController {
 			
 
 		} catch (UserTokenException e) {
-			modelAndView.setViewName("/error/invalidToken");
+			modelAndView.setViewName("error/invalidToken");
 			modelAndView.addObject("messageException", e.getMessage());
 			return modelAndView;
 		}

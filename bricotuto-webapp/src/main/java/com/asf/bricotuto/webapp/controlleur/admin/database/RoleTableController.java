@@ -20,7 +20,7 @@ import com.asf.bricotuto.webapp.service.admin.RoleAdminService;
 public class RoleTableController {
 
 	private RoleAdminService roleAdminService = new RoleAdminService();
-	private String viewHomeMapping = "/admin/database/roleTable";
+	private String viewHomeMapping = "admin/database/roleTable";
 
 	/**
 	 * Show Add role Form
@@ -53,7 +53,7 @@ public class RoleTableController {
 			roleAdminService.addRole(role);
 
 			redirectAttributes.addFlashAttribute("flashSuccess", messageflashSuccess);
-			return new ModelAndView("redirect:" + viewHomeMapping);
+			return new ModelAndView("redirect:/admin/database/roleTable");
 		} catch (FunctionalException funcEx) {
 			modelAndView.addObject("errorform", funcEx.getMessage());
 			return modelAndView;
@@ -96,7 +96,7 @@ public class RoleTableController {
 			}
 			redirectAttributes.addFlashAttribute("flashSuccess", messageflash);
 			roleAdminService.updateRole(role);
-			return new ModelAndView("redirect:" + viewHomeMapping);
+			return new ModelAndView("redirect:/admin/database/roleTable");
 		} catch (FunctionalException funcEx) {
 			modelAndView.addObject("errorform", funcEx.getMessage());
 			return modelAndView;
@@ -115,7 +115,7 @@ public class RoleTableController {
 		String messageflash = "Delete role with id ( " + id + " ) successfully!";
 		roleAdminService.deleteRoleById(id);
 		redirectAttributes.addFlashAttribute("flashSuccess",messageflash);
-		return new ModelAndView("redirect:" + viewHomeMapping);
+		return new ModelAndView("redirect:/admin/database/roleTable");
 	}
 
 }

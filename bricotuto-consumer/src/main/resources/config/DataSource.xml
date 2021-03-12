@@ -8,8 +8,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/bricotuto" />
-		<property name="username" value="adrian" />
-		<property name="password" value="010203" />
+				  value="jdbc:mysql://localhost:3301/bricotuto?createDatabaseIfNotExist=true" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
 	</bean>
 </beans>
