@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ===== Déclaration des DAO pour User===== -->
+	<bean id="userDao"
+		class="com.asf.adriansalmeron.consumer.impl.dao.UserDaoImpl">
+	</bean>
+	<bean id="roleDao"
+		class="com.asf.adriansalmeron.consumer.impl.dao.RoleDaoImpl">
+	</bean>
+	<bean id="userTokenDao"
+		class="com.asf.adriansalmeron.consumer.impl.dao.UserTokenDaoImpl">
+	</bean>
+
+	<!-- ===== DaoFactory ===== -->
+	<bean id="daoFactory"
+		class="com.asf.adriansalmeron.consumer.impl.DaoFactoryImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="roleDao" ref="roleDao" />
+		<property name="userTokenDao" ref="userTokenDao" />
+	</bean>
+
+
+</beans>

@@ -15,16 +15,16 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.asf.bricotuto</groupId>
-	<artifactId>bricotuto</artifactId>
+	<groupId>com.asf.adriansalmeron</groupId>
+	<artifactId>adriansalmeron</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- ===== Informations générales ===== -->
 	<name>${projectName}</name>
-	<url>http://bricotuto.com</url>
+	<url>http://adriansalmeron.com</url>
 	<description>
-       Projet permettant la gestion des formations sur le bricolage
+      Projet vitrine de Adrian SALMERON
     </description>
 
 	<organization>
@@ -36,7 +36,7 @@
 	<!-- Propriétés -->
 	<!-- =============================================================== -->
 	<properties>
-		<projectName>BricoTuto</projectName>
+		<projectName>adriansalmeron</projectName>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -48,10 +48,10 @@
 	<!-- =============================================================== -->
 
 	<modules>
-		<module>bricotuto-webapp</module>
-		<module>bricotuto-model</module>
-		<module>bricotuto-business</module>
-		<module>bricotuto-consumer</module>
+		<module>adriansalmeron-webapp</module>
+		<module>adriansalmeron-model</module>
+		<module>adriansalmeron-business</module>
+		<module>adriansalmeron-consumer</module>
 	</modules>
 
 	<!-- =============================================================== -->
@@ -64,22 +64,22 @@
 			<!-- ===== Modules ===== -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>bricotuto-webapp</artifactId>
+				<artifactId>babo-webapp</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>bricotuto-model</artifactId>
+				<artifactId>adriansalmeron-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>bricotuto-business</artifactId>
+				<artifactId>adriansalmeron-business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>bricotuto-consumer</artifactId>
+				<artifactId>adriansalmeron-consumer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -330,7 +330,7 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>3.1.1</version>
 				<configuration>
-					<configLocation>src/build/checkstyle.xml</configLocation>
+					<configLocation>srcTmpTest/build/checkstyle.xml</configLocation>
 					<linkXRef>false</linkXRef>
 				</configuration>
 				<reportSets>

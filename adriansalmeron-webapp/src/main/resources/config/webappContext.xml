@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- ==== Import des autres Context (Consumer a supprimer??)===== -->
+	<import resource="../config/businessContext.xml" />
+
+	<!-- ==== AbstractResource ===== -->
+	<bean id="abstractResource" abstract="true">
+		<property name="managerFactory" ref="managerFactory"></property>
+	</bean>
+
+	<!-- ===== Déclaration des services ===== -->
+	<bean id="userDetailsServiceImpl"
+		class="com.asf.adriansalmeron.webapp.service.authentification.UserDetailsServiceImpl"
+		parent="abstractResource" />
+
+	<bean id="authService"
+		class="com.asf.adriansalmeron.webapp.service.authentification.AuthService"
+		parent="abstractResource" />
+		
+	<bean id="userAdminService"
+		class="com.asf.adriansalmeron.webapp.service.admin.UserAdminService"
+		parent="abstractResource" />
+		
+	<bean id="roleAdminService"
+		class="com.asf.adriansalmeron.webapp.service.admin.RoleAdminService"
+		parent="abstractResource" />
+
+
+</beans>

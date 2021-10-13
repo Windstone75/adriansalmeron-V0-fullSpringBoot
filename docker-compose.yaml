@@ -7,7 +7,7 @@ services:
     volumes:
       - ./dbdata:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: bricotuto
+      MYSQL_DATABASE: adriansalmeron
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
     ports:
@@ -15,15 +15,15 @@ services:
     restart: always
   #Spring boot application
   asf-app:
-    image: windst0ne/bricotuto
-    container_name: bricotutoWeb-Integration
+    image: windst0ne/adriansalmeron
+    container_name: adriansalmeron-Integration
     build:
-      context: ./bricotuto-webapp
+      context: ./adriansalmeron-webapp
       dockerfile: Dockerfile
     ports:
-      - '80:8080'
+      - '81:8000'
     volumes:
-      - /data/bricotuto-webapp
+      - /data/adriansalmeron-webapp
     depends_on:
       asf-mysql:
         condition: service_healthy
@@ -38,4 +38,6 @@ services:
     environment:
      PMA_HOST: asf-mysql
      MYSQL_ROOT_PASSWORD: root
+
+
 

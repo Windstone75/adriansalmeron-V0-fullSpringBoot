@@ -9,9 +9,9 @@ function trap_ctrlc() {
 
 trap "trap_ctrlc" 2
 
-cd ./bricotuto-webapp &&
+cd ./adriansalmeron-webapp &&
  mvn clean package -DskipTests &&
  cd .. &&
  docker-compose build &&
  docker-compose up
-clea
+pause
