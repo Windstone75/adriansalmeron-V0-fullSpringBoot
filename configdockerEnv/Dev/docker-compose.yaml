@@ -1,0 +1,43 @@
+version: '2.1'
+services:
+  #Database
+  asf-mysql:
+    container_name: Integration-mysql
+    image: 'mysql/mysql-server:5.7'
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: adriansalmeron
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3301:3306'
+    restart: always
+  #Spring boot application
+  asf-app:
+    image: windst0ne/adriansalmeron
+    container_name: adriansalmeron-Integration
+    build:
+      context: ./adriansalmeron-webapp.
+      dockerfile: Dockerfile
+    ports:
+      - '81:8000'
+    volumes:
+      - /data/adriansalmeron-webapp.
+    depends_on:
+      asf-mysql:
+        condition: service_healthy
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - asf-mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+     PMA_HOST: asf-mysql
+     MYSQL_ROOT_PASSWORD: root
+
+
+

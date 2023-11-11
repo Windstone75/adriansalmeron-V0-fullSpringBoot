@@ -1,0 +1,36 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name adriansalmeron.com;
+
+        # On va placer les logs dans un dossier accessible
+        error_log /home/adrian-website/logs/error.log;
+        access_log /home/adrian-website/logs/acess.log;
+
+        location / {
+            proxy_pass http://localhost:8000/;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Port $server_port;
+        }
+
+        # Les urls contennant /. (bot files .xxx)
+            location ~ /\. {
+                deny all;
+                access_log off;
+                log_not_found off;
+            }
+
+        # Les pages d'erreurs
+        error_page 404 500 501 /error.html;
+}
+
+server {
+    # On redirige les www. vers la version sans www
+    listen 80;
+    listen [::]:80;
+    server_name www.adriansalmeron.com;
+    return 301 http://adriansalmeron.com$request_uri;
+}
+
