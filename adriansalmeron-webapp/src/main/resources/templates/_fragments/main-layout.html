@@ -6,22 +6,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<!-- CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-<!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<!-- font icons -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/themify-icons.css}" />
+	<!-- Bootstrap + JohnDoe main styles -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/johndoe.css}" />
+	<!-- core  -->
+	<script th:src="@{/js/jquery/jquery-3.4.1.js}"></script>
+	<script th:src="@{/js/bootstrap/bootstrap.bundle.js}"></script>
+	<!-- bootstrap 3 affix -->
+	<script th:src="@{/js/bootstrap/bootstrap.affix.js}"></script>
+	<!-- Isotope  -->
+	<script th:src="@{/js/isotope/isotope.pkgd.js}"></script>
+
+	<!-- JohnDoe js -->
+	<script th:src="@{/js/johndoe.js}"></script>
 
 <!-- Other javascript, css source files -->
 <th:block th:replace="${otherStaticResources} ?: ~{}"></th:block>
 
 <title th:replace="${title}">Main-layout Title</title>
-
 </head>
 
 <body>
@@ -31,9 +34,56 @@
 		th:insert="~{_fragments/header-fragments :: menu}">Header of
 		main-layout</div>
 
-
 	<!-- main content body  -->
 	<div class="main-content">
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
+			<div class="container">
+				<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a href="#main-header" class="nav-link">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="#about" class="nav-link">About</a>
+						</li>
+						<li class="nav-item">
+							<a href="#underConstruction" class="nav-link">Resume</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav brand">
+						<img th:src="@{/images/home/avatar.jpg}"  alt="" class="brand-img" >
+
+						<li class="brand-txt">
+							<h5 class="brand-title">Adrian Salmeron feliz</h5>
+							<div class="brand-subtitle">Product Owner | Developer</div>
+						</li>
+					</ul>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a href="#underConstruction" class="nav-link">Portfolio</a>
+						</li>
+						<li class="nav-item ">
+							<a href="#underConstruction" class="nav-link">Contact</a>
+						</li>
+						<!-- Sign in/sign out -->
+						<li class="nav-item last-item" sec:authorize="isAnonymous()"><a
+								class="nav-link" th:href="@{/signin}">Sign in</a></li>
+
+						<li class="nav-item last-item" sec:authorize="isAuthenticated()">
+							<form id="logout" th:action="@{/logout}" method="post">
+								<input type="hidden" name="${_csrf.parameterName}"
+									   value="${_csrf.token}" />
+							</form> <a class="nav-link"
+									   href="javascript:document.getElementById('logout').submit()">Logout</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<!-- Globale Flash message -->
 		<div th:if="${flashSuccess}" class="alert alert-success text-center"
 			role="alert">
