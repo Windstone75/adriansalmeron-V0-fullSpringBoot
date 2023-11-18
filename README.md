@@ -1,6 +1,5 @@
-# Adrian SALMERON FELIZ WebSite
+# Adrian SALMERON FELIZ V0 Fulstackk
 
-le site adriansameronf est un site vitrine professionnel et personnel 
 
 ## Environnement de développement
 
